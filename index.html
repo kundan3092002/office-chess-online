@@ -755,6 +755,46 @@ body[data-theme="glass"] button{border-color:rgba(255,255,255,.35); background:r
 body[data-theme="glass"] button.primary{background:linear-gradient(135deg,rgba(159,216,255,.9),rgba(201,182,255,.9)); color:#0e2038;}
 body[data-theme="glass"] .sq.light{box-shadow:inset 0 1px 0 rgba(255,255,255,.5);}
 body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15);}
+body[data-theme="bw"]{
+  --bg-1:#111; --bg-2:#202020; --accent:#fff; --accent-2:#bbb;
+  --board-light:#fff; --board-dark:#111; --board-edge:#000; --line:rgba(255,255,255,.14);
+}
+body[data-theme="bw"] .board-wrap{background:#090909;border:1px solid #444;box-shadow:0 22px 50px rgba(0,0,0,.55);}
+body[data-theme="bw"] #board{border-color:#000;}
+body[data-theme="bw"] .sq.light{background:#f7f7f7;}
+body[data-theme="bw"] .sq.dark{background:#171717;}
+body[data-theme="bw"] .piece.white-p{color:#fff;-webkit-text-stroke:1px #000;}
+body[data-theme="bw"] .piece.black-p{color:#000;-webkit-text-stroke:1px #fff;}
+body[data-theme="ocean"]{
+  --bg-1:#061a2b; --bg-2:#082b45; --accent:#5ee7ff; --accent-2:#78a9ff;
+  --board-light:#dff7ff; --board-dark:#23637d; --board-edge:#0a2435; --line:rgba(94,231,255,.18);
+}
+body[data-theme="ocean"] .board-wrap{background:linear-gradient(145deg,#1c6b86,#071b2c);border-color:rgba(94,231,255,.3);}
+body[data-theme="forest"]{
+  --bg-1:#071a12; --bg-2:#0c2b1c; --accent:#76e6a8; --accent-2:#b8e6c8;
+  --board-light:#e9f5e8; --board-dark:#2e6548; --board-edge:#10271b; --line:rgba(118,230,168,.18);
+}
+body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,#0b2518);border-color:rgba(118,230,168,.3);}
+
+.theme-tile .swatch.bw{background:linear-gradient(90deg,#fff 0 50%,#111 50%);}
+.theme-tile .swatch.ocean{background:linear-gradient(135deg,#dff7ff,#23637d,#071b2c);}
+.theme-tile .swatch.forest{background:linear-gradient(135deg,#e9f5e8,#2e6548,#10271b);}
+
+.live-win{
+  min-width:44px;text-align:center;padding:4px 7px;border-radius:999px;
+  background:rgba(94,231,197,.09);border:1px solid rgba(94,231,197,.18);
+  color:#8ff4dc;font-size:11px;font-weight:850;font-variant-numeric:tabular-nums;
+}
+.tournament-head,.history-head{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.tournament-card{background:linear-gradient(145deg,rgba(33,51,82,.96),rgba(13,28,48,.96));}
+.history-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.history-row:last-child{border-bottom:none;}
+.history-result{font-weight:800;color:#8ff4dc;}
+.history-date{font-size:10px;color:var(--muted);}
+.winner-dance{font-size:48px;animation:dance 0.55s ease-in-out infinite alternate;}
+@keyframes dance{from{transform:rotate(-10deg) translateY(0) scale(1)}to{transform:rotate(10deg) translateY(-8px) scale(1.08);}}
+.result-box.winner-party{overflow:hidden;}
+
 
 /* ============================================================
    SMOOTH ANIMATIONS
@@ -799,6 +839,38 @@ body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15)
 @keyframes threatGlow{0%,100%{opacity:.5;} 50%{opacity:1;}}
 #btnThreats.on{background:rgba(255,107,107,.16); border-color:rgba(255,107,107,.55); color:#ffb3ab;}
 </style>
+
+<style id="ultimate-pack-css">
+.ultimate-dashboard{margin-top:0}
+.ultimate-dashboard .card{min-height:180px}
+.leader-row{display:grid;grid-template-columns:34px 1fr auto auto;gap:9px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.leader-row:last-child{border-bottom:none}
+.rank-badge{font-weight:900;font-size:14px;text-align:center}
+.leader-name{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leader-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.leader-pct{font-weight:900;color:#8ff4dc;font-variant-numeric:tabular-nums}
+.me-row{background:rgba(94,231,197,.07);border-radius:9px;padding-left:6px;padding-right:6px}
+.profile-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.profile-stat{padding:10px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.035);text-align:center}
+.profile-stat b{display:block;font-size:17px}.profile-stat span{font-size:9px;color:var(--muted);text-transform:uppercase}
+.rating-big{font-size:30px;font-weight:900;color:var(--accent)}
+.streak{color:#ffd477;font-weight:800}
+.achievement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.achievement{padding:9px;border-radius:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);opacity:.42}
+.achievement.unlocked{opacity:1;border-color:rgba(94,231,197,.28);background:rgba(94,231,197,.07)}
+.achievement .aicon{font-size:20px}.achievement b{font-size:11px}.achievement small{display:block;color:var(--muted);font-size:9px;margin-top:2px}
+.performance-bar{height:9px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-top:7px}.performance-bar i{display:block;height:100%;background:linear-gradient(90deg,#5ee7c5,#8aa8ff);border-radius:99px}
+.tool-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.tool-row:last-child{border-bottom:0}.tool-actions{display:flex;gap:6px;flex-wrap:wrap}
+.replay-overlay{position:fixed;inset:0;background:rgba(2,8,15,.84);backdrop-filter:blur(9px);display:none;align-items:center;justify-content:center;z-index:10001;padding:16px}
+.replay-overlay.show{display:flex}.replay-box{width:min(96vw,760px);max-height:94vh;overflow:auto;padding:22px;border-radius:20px;background:linear-gradient(145deg,#18304b,#0b1d31);border:1px solid rgba(94,231,197,.35);box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.replay-board{width:min(72vw,520px);aspect-ratio:1;margin:16px auto;background:#222;display:grid;grid-template-columns:repeat(8,1fr);border:6px solid #111}
+.replay-square{display:grid;place-items:center;font-size:clamp(22px,6vw,52px);position:relative}.replay-square.light{background:#eef4e8}.replay-square.dark{background:#4b7d6b}
+.replay-controls{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px}.replay-controls div{min-width:150px;text-align:center;font-size:12px;color:#d9e6ee}
+.replay-quality{text-align:center;color:#9fb4c4;font-size:11px;margin-top:10px}
+@media(max-width:700px){.profile-stat-grid{grid-template-columns:repeat(2,1fr)}.leader-row{grid-template-columns:30px 1fr auto}.leader-row .leader-meta{display:none}.replay-board{width:90vw}}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -843,6 +915,9 @@ body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15)
         <div class="theme-tile" data-theme="neon"><div class="swatch neon"></div><div class="tlabel">Cyberpunk Neon</div></div>
         <div class="theme-tile" data-theme="mdark"><div class="swatch mdark"></div><div class="tlabel">Minimalist Dark</div></div>
         <div class="theme-tile" data-theme="glass"><div class="swatch glass"></div><div class="tlabel">3D Glass</div></div>
+        <div class="theme-tile" data-theme="bw"><div class="swatch bw"></div><div class="tlabel">Black & White</div></div>
+        <div class="theme-tile" data-theme="ocean"><div class="swatch ocean"></div><div class="tlabel">Ocean Blue</div></div>
+        <div class="theme-tile" data-theme="forest"><div class="swatch forest"></div><div class="tlabel">Forest Green</div></div>
       </div>
     </div>
 
@@ -909,6 +984,68 @@ body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15)
       <button class="primary" id="btnLocal2p">Start local game</button>
     </div>
 
+    <div class="card tournament-card">
+      <div class="tournament-head">
+        <div>
+          <h2>🏆 Tournaments</h2>
+          <div class="hint">Create your own tournament or let the computer generate a bot tournament.</div>
+        </div>
+        <span class="badge">NEW</span>
+      </div>
+      <div class="btn-row">
+        <button class="primary" id="btnCreateTournament">Create Player Tournament</button>
+        <button id="btnComputerTournament">Computer Tournament</button>
+      </div>
+      <div id="tournamentStatus" class="status-line"></div>
+    </div>
+
+    <div class="card">
+      <div class="history-head">
+        <h2>📜 Game History</h2>
+        <button class="small" id="btnRefreshHistory">Refresh</button>
+      </div>
+      <div id="gameHistoryDashboard"><div class="empty">No finished games yet.</div></div>
+    </div>
+
+
+    <div class="grid2 ultimate-dashboard">
+      <div class="card">
+        <div class="history-head">
+          <div>
+            <h2>🏆 Global Top 10</h2>
+            <div class="hint">All players • minimum 5 completed games • ranked by winning %</div>
+          </div>
+          <button class="small" id="btnRefreshLeaderboard">Refresh</button>
+        </div>
+        <div id="leaderboardList"><div class="empty">Loading global ranking…</div></div>
+      </div>
+
+      <div class="card">
+        <h2>👤 My Profile & Stats</h2>
+        <div id="myProfileCard"><div class="empty">Loading profile…</div></div>
+      </div>
+
+      <div class="card">
+        <h2>🎖 Achievements</h2>
+        <div id="achievementList" class="achievement-grid"></div>
+      </div>
+
+      <div class="card">
+        <h2>📈 Performance</h2>
+        <div id="performanceCard"><div class="empty">Play some games to build your stats.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="history-head">
+        <div>
+          <h2>📚 Game Tools</h2>
+          <div class="hint">Replay your saved games, download PGN, and review move quality.</div>
+        </div>
+      </div>
+      <div id="gameToolsList"><div class="empty">Finish a game to unlock replay and PGN tools.</div></div>
+    </div>
+
     <div class="grid2">
       <div class="card">
         <h2>Friends</h2>
@@ -955,11 +1092,13 @@ body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15)
           <div class="player white" id="playerWhite">
             <div class="swatch"></div>
             <div class="name" id="whiteName">White</div>
+            <div class="live-win" id="whiteWinPct">50%</div>
             <div class="clock" id="whiteClock">--:--</div>
           </div>
           <div class="player black" id="playerBlack" style="margin-top:6px;">
             <div class="swatch"></div>
             <div class="name" id="blackName">Black</div>
+            <div class="live-win" id="blackWinPct">50%</div>
             <div class="clock" id="blackClock">--:--</div>
           </div>
           <div class="status-line" id="statusLine">White to move.</div>
@@ -995,6 +1134,11 @@ body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15)
             <button id="btnFlip">Flip board</button>
             <button id="btnExtendTime">⏱ Extend +5 min</button>
             <button id="btnThreats">⚠ Threat Hints: Off</button>
+            <button id="btnDrawOffer">🤝 Offer Draw</button>
+            <button id="btnTakeback">↩ Takeback</button>
+            <button id="btnRematch">🔄 Rematch</button>
+            <button id="btnPgn">📥 PGN</button>
+            <button id="btnReplay">▶ Replay</button>
             <button id="btnResign">Resign</button>
           </div>
         </div>
@@ -1017,12 +1161,33 @@ body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15)
   </div>
 </div>
 
+
+<div class="replay-overlay" id="replayOverlay">
+  <div class="replay-box">
+    <div class="history-head">
+      <div>
+        <div class="result-kicker">GAME REPLAY</div>
+        <h2 id="replayTitle">Replay</h2>
+      </div>
+      <button class="small" id="replayClose">Close</button>
+    </div>
+    <div class="replay-board" id="replayBoard"></div>
+    <div class="replay-controls">
+      <button id="replayPrev">← Previous</button>
+      <div id="replayMoveLabel">Start position</div>
+      <button id="replayNext">Next →</button>
+    </div>
+    <div id="replayQuality" class="replay-quality"></div>
+  </div>
+</div>
+
 <div class="result-overlay" id="resultOverlay">
   <div class="result-box">
     <div class="result-trophy">🏆</div>
-    <div class="result-kicker">CHECKMATE</div>
+    <div class="winner-dance">💃🕺</div>
+    <div class="result-kicker" id="resultReasonLabel">GAME OVER</div>
     <h2><span id="resultWinnerName">Player</span> wins!</h2>
-    <p>Beautiful checkmate. Congratulations! 🎉</p>
+    <p id="resultMessage">Congratulations! The winner is celebrating 🎉</p>
     <button class="primary" id="resultClose">Continue</button>
   </div>
   <div class="confetti-layer" id="confettiLayer"></div>
@@ -2015,6 +2180,7 @@ function detachGameListener(){
 }
 
 function openOnlineGame(gameId){
+  window.__onlineGameFinished=false;
   gameMode='online'; currentGameId=gameId; window.currentOnlineGameId=currentGameId; window.currentUser=currentUser; window.db=db; detachGameListener(); gameLogged=false; resultPopupShownFor=null;
   flipped=false; selected=null; legalTargets=[]; lastMove=null;
   buildBoard();
@@ -2590,5 +2756,660 @@ window.addEventListener('pagehide',function(){
   }catch(e){}
 });
 </script>
+
+<script id="enhancements-v4">
+(function(){
+  "use strict";
+
+  /* ---------- History ---------- */
+  const HISTORY_KEY = "deskchess_game_history_v2";
+  let historySavedKeys = new Set();
+
+  function readLocalHistory(){
+    try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); }
+    catch(e){ return []; }
+  }
+  function writeLocalHistory(items){
+    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0,100))); } catch(e){}
+  }
+  function saveFinishedHistory(result, winnerName, reason, whiteName, blackName, mode){
+    const key = [mode, whiteName, blackName, result, reason].join("|");
+    if(historySavedKeys.has(key)) return;
+    historySavedKeys.add(key);
+    const items = readLocalHistory();
+    if(items.some(x=>x.key===key)) return;
+    items.unshift({
+      key, result, winnerName:winnerName||"",
+      reason:reason||"Game finished", whiteName, blackName,
+      mode, at:new Date().toISOString()
+    });
+    writeLocalHistory(items);
+    renderHistoryDashboard();
+  }
+  function resultTextForStatus(status, winner, reason){
+    if(status==="timeout") return winner ? (winner==="white"?"White":"Black")+" won on time" : "Time out";
+    if(status==="resigned") return winner ? (winner==="white"?"White":"Black")+" won by resignation" : "Resignation";
+    if(status==="checkmate") return winner ? (winner==="white"?"White":"Black")+" won by checkmate" : "Checkmate";
+    if(status==="draw") return "Draw";
+    if(status==="abandoned") return winner ? (winner==="white"?"White":"Black")+" won — opponent left" : "Game abandoned";
+    return reason || "Game finished";
+  }
+  function renderHistoryDashboard(extra){
+    const el=document.getElementById("gameHistoryDashboard");
+    if(!el) return;
+    const local=readLocalHistory();
+    const rows=extra ? extra.concat(local) : local;
+    if(!rows.length){ el.innerHTML='<div class="empty">No finished games yet.</div>'; return; }
+    el.innerHTML=rows.slice(0,30).map(x=>{
+      const when=x.at ? new Date(x.at).toLocaleString() : "";
+      return '<div class="history-row"><div><div class="name">'+escapeHtml(x.whiteName||"White")+
+        ' <span class="hint">vs</span> '+escapeHtml(x.blackName||"Black")+
+        '</div><div class="history-date">'+escapeHtml(x.mode||"Game")+' • '+escapeHtml(when)+'</div></div>'+
+        '<div class="history-result">'+escapeHtml(x.result||"Finished")+'</div>'+
+        '<div class="history-date">'+escapeHtml(x.reason||"")+'</div></div>';
+    }).join("");
+  }
+  window.renderHistoryDashboard=renderHistoryDashboard;
+  document.getElementById("btnRefreshHistory")?.addEventListener("click", renderHistoryDashboard);
+
+  /* ---------- Live winning percentage ---------- */
+  function liveWinPercentages(){
+    const values={p:1,n:3.2,b:3.3,r:5,q:9,k:0};
+    let white=0, black=0;
+    game.board().forEach(row=>row.forEach(p=>{
+      if(!p) return;
+      if(p.color==="w") white += values[p.type] || 0;
+      else black += values[p.type] || 0;
+    }));
+    const total=white+black;
+    let wp=50, bp=50;
+    if(total>0){
+      const diff=white-black;
+      // Smoothly map material advantage to a live percentage without claiming a true engine probability.
+      wp=Math.round(50 + Math.max(-45,Math.min(45,diff*5)));
+      bp=100-wp;
+    }
+    const w=document.getElementById("whiteWinPct"), b=document.getElementById("blackWinPct");
+    if(w) w.textContent=wp+"%";
+    if(b) b.textContent=bp+"%";
+  }
+  window.liveWinPercentages=liveWinPercentages;
+
+  /* ---------- Hard lock after time expires ---------- */
+  let localClockEnded=false;
+  function finishLocalTimeout(){
+    if(localClockEnded || gameMode==="online" || game.game_over()) return;
+    const loser=game.turn();
+    const winner=loser==="w" ? "Black" : "White";
+    localClockEnded=true;
+    try{
+      whiteRemainingMs = loser==="w" ? 0 : whiteRemainingMs;
+      blackRemainingMs = loser==="b" ? 0 : blackRemainingMs;
+    }catch(e){}
+    statusLine.textContent=winner+" wins on time.";
+    statusLine.classList.add("alert");
+    const wn=document.getElementById(winner==="White"?"whiteName":"blackName").textContent.replace(/\s*\(you\)\s*$/,"");
+    const reason="timeout";
+    saveFinishedHistory(winner+" won on time",wn,reason,
+      document.getElementById("whiteName").textContent,
+      document.getElementById("blackName").textContent,
+      gameMode==="bot"?"vs Computer":"Local 2-player");
+    showResultCelebration(wn,"TIME OUT",winner+" wins because the clock reached 00:00.");
+  }
+
+  function enforceClock(){
+    if(!gameScreen || gameScreen.classList.contains("hidden")) return;
+    if(gameMode!=="online" && !game.game_over() && !localClockEnded){
+      const now=Date.now();
+      if(!turnStartedAtMs) turnStartedAtMs=now;
+      const rem=(game.turn()==="w"?whiteRemainingMs:blackRemainingMs)-(now-turnStartedAtMs);
+      if(rem<=0) finishLocalTimeout();
+    }
+    if(gameMode==="online" && !game.game_over() && currentGameId && !localClockEnded){
+      checkOnlineTimeout().catch(()=>{});
+    }
+    liveWinPercentages();
+  }
+
+  const originalRenderClocks = renderClocks;
+  renderClocks = function(){
+    originalRenderClocks();
+    enforceClock();
+  };
+
+  const originalStartLocalGame = startLocalGame;
+  startLocalGame = function(){
+    localClockEnded=false;
+    originalStartLocalGame();
+    renderHistoryDashboard();
+    liveWinPercentages();
+  };
+
+  const originalStartBotGame = startBotGame;
+  startBotGame = function(level){
+    localClockEnded=false;
+    originalStartBotGame(level);
+    renderHistoryDashboard();
+    liveWinPercentages();
+  };
+
+  const originalFinalizeMove = finalizeMove;
+  finalizeMove = function(from,to,promotion){
+    if(localClockEnded) return;
+    originalFinalizeMove(from,to,promotion);
+    liveWinPercentages();
+  };
+
+  /* Keep the timer accurate after every local/bot move. */
+  const originalAfterMove = afterMove;
+  afterMove = function(){
+    originalAfterMove();
+    turnStartedAtMs=Date.now();
+    liveWinPercentages();
+    recordTerminalLocalState();
+  };
+
+  const originalBotMove = botMove;
+  botMove = function(){
+    if(localClockEnded) return;
+    originalBotMove();
+    turnStartedAtMs=Date.now();
+    liveWinPercentages();
+    recordTerminalLocalState();
+  };
+
+  function showResultCelebration(winnerName, reason, message){
+    const overlay=document.getElementById("resultOverlay");
+    if(!overlay) return;
+    const w=document.getElementById("resultWinnerName");
+    const r=document.getElementById("resultReasonLabel");
+    const m=document.getElementById("resultMessage");
+    if(w) w.textContent=winnerName||"Player";
+    if(r) r.textContent=reason||"GAME OVER";
+    if(m) m.textContent=message||"Congratulations! 🎉";
+    overlay.classList.add("show");
+    const layer=document.getElementById("confettiLayer");
+    if(layer){
+      layer.innerHTML="";
+      for(let i=0;i<110;i++){
+        const p=document.createElement("span");
+        p.className="confetti-piece";
+        p.style.left=(Math.random()*100)+"%";
+        p.style.animationDelay=(Math.random()*0.8)+"s";
+        p.style.setProperty("--dx",((Math.random()-.5)*360)+"px");
+        p.style.setProperty("--rot",((Math.random()*720)-360)+"deg");
+        p.style.background=`hsl(${Math.floor(Math.random()*360)} 85% 65%)`;
+        layer.appendChild(p);
+      }
+    }
+  }
+  window.showResultCelebration=showResultCelebration;
+
+  function recordTerminalLocalState(){
+    if(!game.game_over()) return;
+    let winner=null, result="", reason="";
+    if(game.in_checkmate()){
+      winner=game.turn()==="w"?"Black":"White";
+      result=winner+" won by checkmate"; reason="Checkmate";
+    } else if(game.in_stalemate()){ result="Draw"; reason="Stalemate"; }
+    else if(game.in_threefold_repetition()){ result="Draw"; reason="Repetition"; }
+    else if(game.insufficient_material()){ result="Draw"; reason="Insufficient material"; }
+    else if(game.in_draw()){ result="Draw"; reason="Draw"; }
+    if(!result) return;
+    const whiteName=document.getElementById("whiteName").textContent;
+    const blackName=document.getElementById("blackName").textContent;
+    const wn=winner ? document.getElementById(winner==="White"?"whiteName":"blackName").textContent.replace(/\s*\(you\)\s*$/,"") : "";
+    saveFinishedHistory(result,wn,reason,whiteName,blackName,gameMode==="bot"?"vs Computer":"Local 2-player");
+    if(winner) showResultCelebration(wn,"WINNER",wn+" wins the game! 🎉");
+  }
+
+  /* ---------- Online terminal states + lock ---------- */
+  window.__onlineGameFinished=false;
+
+  async function syncOnlineTerminalState(){
+    if(gameMode!=="online" || !currentGameId || !currentUser) return;
+    try{
+      const snap=await db.collection("games").doc(currentGameId).get();
+      if(!snap.exists) return;
+      const d=snap.data()||{};
+      if(d.status==="active"){
+        window.__onlineGameFinished=false;
+        return;
+      }
+      if(["timeout","checkmate","resigned","draw","abandoned"].includes(d.status)){
+        window.__onlineGameFinished=true;
+        ["btnUndo","btnNew","btnExtendTime","btnResign"].forEach(id=>{
+          const b=document.getElementById(id); if(b) b.disabled=true;
+        });
+        const whiteName=(d.whiteUsername||"White");
+        const blackName=(d.blackUsername||"Black");
+        const winnerName=d.winner ? (d.winner==="white"?whiteName:blackName) : "";
+        const result=resultTextForStatus(d.status,d.winner,d.resultReason);
+        saveFinishedHistory(result,winnerName,d.resultReason||d.status,
+          whiteName,blackName,d.matchType==="random"?"Live Random Match":"Online");
+        if(winnerName) showResultCelebration(winnerName,
+          d.status==="timeout"?"TIME OUT":d.status==="checkmate"?"CHECKMATE":"WINNER",
+          winnerName+" wins the game! 🎉");
+      }
+    }catch(e){}
+  }
+  setInterval(syncOnlineTerminalState,1000);
+
+  /* Patch the board interaction guard so finished/timeout games cannot move. */
+  const originalCanInteract = canInteract;
+  canInteract = function(){
+    if(localClockEnded) return false;
+    if(gameMode==="online" && window.__onlineGameFinished) return false;
+    return originalCanInteract();
+  };
+
+  /* ---------- Theme: persist + apply Black & White and 2 additional themes ---------- */
+  const originalApplyTheme = applyTheme;
+  applyTheme = function(theme){
+    originalApplyTheme(theme);
+    if(theme==="bw" || theme==="ocean" || theme==="forest"){
+      document.body.setAttribute("data-theme",theme);
+    }
+  };
+
+  /* ---------- Tournament UI ---------- */
+  function tournamentPlayersPrompt(){
+    const raw=prompt("Enter player names separated by commas (2 to 8):","Player 1, Player 2");
+    if(!raw) return null;
+    const names=raw.split(",").map(x=>x.trim()).filter(Boolean).slice(0,8);
+    if(names.length<2){ alert("Please enter at least 2 players."); return null; }
+    return names;
+  }
+  function runTournament(players, computerMode){
+    const el=document.getElementById("tournamentStatus");
+    if(!players || players.length<2) return;
+    const rounds=[];
+    for(let i=0;i<players.length;i+=2){
+      if(players[i+1]) rounds.push(players[i]+" vs "+players[i+1]);
+      else rounds.push(players[i]+" gets a bye");
+    }
+    const title=computerMode ? "Computer Tournament created" : "Player Tournament created";
+    if(el) el.innerHTML="<b>"+escapeHtml(title)+"</b><br>"+escapeHtml(rounds.join(" • "))+
+      "<br><span class='hint'>Tournament bracket is ready. Games are played from the normal game screen.</span>";
+    localStorage.setItem("deskchess_last_tournament",JSON.stringify({title,players,createdAt:new Date().toISOString()}));
+  }
+  document.getElementById("btnCreateTournament")?.addEventListener("click",()=>{
+    const players=tournamentPlayersPrompt();
+    if(players) runTournament(players,false);
+  });
+  document.getElementById("btnComputerTournament")?.addEventListener("click",()=>{
+    const n=Number(prompt("How many computer players? (2-8)","4"));
+    if(!Number.isFinite(n) || n<2) return;
+    const players=["You"];
+    for(let i=1;i<Math.min(8,n+1);i++) players.push("Computer "+i);
+    runTournament(players,true);
+  });
+
+  /* ---------- Make dashboard history available after login ---------- */
+  const oldShowLobby=showLobby;
+  showLobby=function(){
+    oldShowLobby();
+    renderHistoryDashboard();
+    liveWinPercentages();
+  };
+
+  /* Online game result watcher: disable controls once status is terminal. */
+  setInterval(function(){
+    enforceClock();
+    if(gameMode==="online" && currentGameId && window.__onlineGameFinished){
+      ["btnUndo","btnNew","btnExtendTime","btnResign"].forEach(id=>{
+        const b=document.getElementById(id); if(b) b.disabled=true;
+      });
+    }
+  },1000);
+
+  /* Re-enable controls when a fresh game starts. */
+  setInterval(function(){
+    if(gameMode && !window.__onlineGameFinished && !localClockEnded){
+      ["btnUndo","btnNew","btnExtendTime","btnResign"].forEach(id=>{
+        const b=document.getElementById(id); if(b) b.disabled=false;
+      });
+    }
+  },1200);
+
+  renderHistoryDashboard();
+})();
+</script>
+
+
+<script id="ultimate-pack-js">
+(function(){
+  "use strict";
+
+  const UKEY = "deskchess_ultimate_v1";
+  const historyKey = "deskchess_game_history";
+  let replayState = {moves:[], index:0, title:"Replay"};
+  let audioCtx = null;
+
+  function q(id){ return document.getElementById(id); }
+  function esc(s){ return typeof escapeHtml==="function" ? escapeHtml(String(s||"")) : String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
+  function getHistory(){ try{return JSON.parse(localStorage.getItem(historyKey)||"[]")}catch(e){return[]} }
+  function saveHistory(h){ localStorage.setItem(historyKey,JSON.stringify(h.slice(0,100))); }
+  function uid(){ return currentUser && currentUser.uid; }
+  function uname(){ return currentUser && currentUser.username || "Player"; }
+
+  /* ---------- Central player stats / rating ---------- */
+  async function ensurePlayerStats(){
+    if(!currentUser || !window.db) return;
+    const ref=db.collection("users").doc(currentUser.uid);
+    const snap=await ref.get().catch(()=>null);
+    const d=snap && snap.exists ? snap.data() : {};
+    if(d.games===undefined || d.rating===undefined){
+      await ref.set({
+        username:uname(), games:d.games||0, wins:d.wins||0, losses:d.losses||0,
+        draws:d.draws||0, rating:d.rating||1200, winPct:d.winPct||0,
+        streak:d.streak||0, bestStreak:d.bestStreak||0, updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+      },{merge:true}).catch(()=>{});
+    }
+  }
+
+  async function updateMyStats(result, opponentRating){
+    if(!uid() || !window.db) return;
+    const ref=db.collection("users").doc(uid());
+    const snap=await ref.get().catch(()=>null);
+    const d=snap && snap.exists ? snap.data() : {};
+    const games=(d.games||0)+1;
+    const wins=(d.wins||0)+(result==="win"?1:0);
+    const losses=(d.losses||0)+(result==="loss"?1:0);
+    const draws=(d.draws||0)+(result==="draw"?1:0);
+    const oldRating=d.rating||1200;
+    const opp=Number(opponentRating||1200);
+    const expected=1/(1+Math.pow(10,(opp-oldRating)/400));
+    const actual=result==="win"?1:result==="draw"?.5:0;
+    const k=32;
+    const rating=Math.max(100,Math.round(oldRating+k*(actual-expected)));
+    const streak=result==="win"?(d.streak||0)+1:0;
+    const bestStreak=Math.max(d.bestStreak||0,streak);
+    const winPct=games ? +(wins/games*100).toFixed(2) : 0;
+    await ref.set({username:uname(),games,wins,losses,draws,rating,winPct,streak,bestStreak,
+      updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
+    renderMyProfile({games,wins,losses,draws,rating,winPct,streak,bestStreak});
+    renderAchievements({games,wins,losses,draws,rating,winPct,streak,bestStreak});
+    renderPerformance({games,wins,losses,draws,rating,winPct,streak,bestStreak});
+  }
+
+  function resultForMe(winnerUid, status){
+    if(status==="draw") return "draw";
+    if(!winnerUid) return "draw";
+    return winnerUid===uid() ? "win" : "loss";
+  }
+
+  /* ---------- Global leaderboard ---------- */
+  async function renderLeaderboard(){
+    const el=q("leaderboardList"); if(!el || !window.db) return;
+    el.innerHTML='<div class="empty">Loading global ranking…</div>';
+    const snap=await db.collection("users").get().catch(()=>null);
+    if(!snap){el.innerHTML='<div class="empty">Ranking unavailable. Check Firestore rules.</div>';return;}
+    const players=[];
+    snap.forEach(doc=>{
+      const d=doc.data()||{}, games=Number(d.games||0), wins=Number(d.wins||0);
+      const pct=games ? Number((wins/games*100).toFixed(2)) : Number(d.winPct||0);
+      if(d.username) players.push({uid:doc.id,username:d.username,games,wins,losses:Number(d.losses||0),draws:Number(d.draws||0),rating:Number(d.rating||1200),pct});
+    });
+    players.sort((a,b)=>b.pct-a.pct || b.wins-a.wins || b.rating-a.rating || b.games-a.games || a.username.localeCompare(b.username));
+    const eligible=players.filter(p=>p.games>=5);
+    const top=eligible.slice(0,10);
+    const myRank=eligible.findIndex(p=>p.uid===uid())+1;
+    if(!top.length){el.innerHTML='<div class="empty">No ranked players yet. Complete 5 games to enter the Top 10.</div>';return;}
+    el.innerHTML=top.map((p,i)=>`
+      <div class="leader-row ${p.uid===uid()?'me-row':''}">
+        <div class="rank-badge">${i<3?["🥇","🥈","🥉"][i]:"#"+(i+1)}</div>
+        <div><div class="leader-name">${esc(p.username)}</div><div class="leader-meta">${p.games} games • ${p.wins}W ${p.losses}L ${p.draws}D • ${p.rating} rating</div></div>
+        <div class="leader-pct">${p.pct.toFixed(1)}%</div>
+        <div class="leader-meta">WIN</div>
+      </div>`).join("");
+    if(uid() && myRank>10){
+      const me=eligible[myRank-1];
+      el.innerHTML += `<div class="hint" style="margin-top:10px">Your rank: <b>#${myRank}</b> • ${me.pct.toFixed(1)}% • ${me.games} games</div>`;
+    }
+  }
+
+  function renderMyProfile(d){
+    const el=q("myProfileCard"); if(!el)return;
+    el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div><div style="font-size:18px;font-weight:900">${esc(uname())}</div><div class="hint">Global player profile</div></div>
+      <div style="text-align:right"><div class="rating-big">${d.rating||1200}</div><div class="hint">ELO rating</div></div>
+    </div>
+    <div class="profile-stat-grid">
+      <div class="profile-stat"><b>${d.games||0}</b><span>Games</span></div>
+      <div class="profile-stat"><b>${d.wins||0}</b><span>Wins</span></div>
+      <div class="profile-stat"><b>${d.losses||0}</b><span>Losses</span></div>
+      <div class="profile-stat"><b>${d.draws||0}</b><span>Draws</span></div>
+      <div class="profile-stat"><b>${Number(d.winPct||0).toFixed(1)}%</b><span>Win %</span></div>
+      <div class="profile-stat"><b class="streak">🔥 ${d.streak||0}</b><span>Streak</span></div>
+    </div>`;
+  }
+
+  function renderPerformance(d){
+    const el=q("performanceCard"); if(!el)return;
+    const pct=Math.min(100,Math.max(0,Number(d.winPct||0)));
+    el.innerHTML=`<div style="display:flex;justify-content:space-between"><span>Win rate</span><b>${pct.toFixed(1)}%</b></div>
+      <div class="performance-bar"><i style="width:${pct}%"></i></div>
+      <div class="hint" style="margin-top:12px">Best streak: <b>${d.bestStreak||0}</b> • Rating: <b>${d.rating||1200}</b></div>`;
+  }
+
+  function renderAchievements(d){
+    const el=q("achievementList"); if(!el)return;
+    const a=[
+      ["♟️","First Game",d.games>=1,"Complete your first game"],
+      ["🏆","First Win",d.wins>=1,"Win your first game"],
+      ["🔥","Hot Streak",d.bestStreak>=5,"Reach a 5-win streak"],
+      ["⚔️","10 Wins",d.wins>=10,"Win 10 games"],
+      ["💯","50 Games",d.games>=50,"Complete 50 games"],
+      ["👑","1500 Rating",d.rating>=1500,"Reach 1500 rating"]
+    ];
+    el.innerHTML=a.map(x=>`<div class="achievement ${x[2]?'unlocked':''}"><div class="aicon">${x[0]}</div><b>${x[1]}</b><small>${x[3]}</small></div>`).join("");
+  }
+
+  async function loadProfile(){
+    if(!uid()) return;
+    await ensurePlayerStats();
+    const s=await db.collection("users").doc(uid()).get().catch(()=>null);
+    const d=s&&s.exists?s.data():{games:0,wins:0,losses:0,draws:0,rating:1200,winPct:0,streak:0,bestStreak:0};
+    renderMyProfile(d);renderPerformance(d);renderAchievements(d);
+    renderLeaderboard();renderGameTools();
+  }
+
+  /* ---------- Game result -> cloud stats ---------- */
+  const originalShowResult = window.showResultCelebration;
+  let statsRecordedKeys = new Set();
+  async function recordCloudResult(winnerUid, status, key, opponentRating){
+    if(!uid() || statsRecordedKeys.has(key)) return;
+    statsRecordedKeys.add(key);
+    const result=resultForMe(winnerUid,status);
+    await updateMyStats(result,opponentRating);
+    playSound(result==="win"?"win":result==="draw"?"draw":"lose");
+    renderLeaderboard();
+    renderGameTools();
+  }
+
+  /* ---------- Sound effects ---------- */
+  function playSound(type){
+    try{
+      audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+      const now=audioCtx.currentTime;
+      const notes=type==="win"?[523,659,784]:type==="lose"?[330,247]:type==="draw"?[440,440]:[620];
+      notes.forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=f;o.type="sine";g.gain.setValueAtTime(.0001,now+i*.11);g.gain.exponentialRampToValueAtTime(.06,now+i*.11+.02);g.gain.exponentialRampToValueAtTime(.0001,now+i*.11+.16);o.connect(g);g.connect(audioCtx.destination);o.start(now+i*.11);o.stop(now+i*.11+.18);});
+    }catch(e){}
+  }
+  window.playChessSound=playSound;
+
+  /* ---------- PGN / replay ---------- */
+  function pgnFromMoves(moves, white, black, result){
+    let p="[Event \"Desk Chess\"]\n[Site \"Desk Chess\"]\n[White \""+String(white||"White").replace(/"/g,"'")+" \"]\n[Black \""+String(black||"Black").replace(/"/g,"'")+" \"]\n[Result \""+(result||"*")+"\"]\n\n";
+    for(let i=0;i<moves.length;i+=2){p+=(Math.floor(i/2)+1)+". "+moves[i]+(moves[i+1]?" "+moves[i+1]+" ":" ");} return p.trim()+"\n";
+  }
+  function downloadText(name,text){
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"text/plain"}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }
+  function currentMoves(){return game.history({verbose:false})||[];}
+  function downloadCurrentPgn(){
+    const moves=currentMoves(); if(!moves.length){statusLine.textContent="No moves to export yet.";return;}
+    const result=game.isCheckmate()?(game.turn()==="w"?"0-1":"1-0"):game.isDraw()?"1/2-1/2":"*";
+    downloadText("desk-chess-game.pgn",pgnFromMoves(moves,q("whiteName")?.textContent,q("blackName")?.textContent,result));
+  }
+
+  function drawReplay(){
+    const el=q("replayBoard"); if(!el)return; el.innerHTML="";
+    const rgame=new Chess(); replayState.moves.slice(0,replayState.index).forEach(m=>{try{rgame.move(m)}catch(e){}});
+    const board=rgame.board();
+    board.forEach((row,ri)=>row.forEach((p,ci)=>{
+      const s=document.createElement("div");s.className="replay-square "+(((ri+ci)%2)?"dark":"light");s.textContent=p?UNICODE[p.color][p.type]:"";el.appendChild(s);
+    }));
+    q("replayMoveLabel").textContent=replayState.index===0?"Start position":`Move ${replayState.index} / ${replayState.moves.length}`;
+    const bad=replayState.moves.slice(0,replayState.index).filter((m,i)=>i>0 && m===replayState.moves[i-1]).length;
+    q("replayQuality").textContent=bad?"Review repeated move choices.":"Basic replay loaded. For engine-grade analysis, connect a chess engine later.";
+  }
+  function openReplay(moves,title){
+    if(!moves||!moves.length)return;
+    replayState={moves:[...moves],index:0,title:title||"Replay"};
+    q("replayTitle").textContent=replayState.title;
+    q("replayOverlay").classList.add("show");drawReplay();
+  }
+
+  function renderGameTools(){
+    const el=q("gameToolsList"); if(!el)return;
+    const h=getHistory();
+    if(!h.length){el.innerHTML='<div class="empty">Finish a game to unlock replay and PGN tools.</div>';return;}
+    el.innerHTML=h.slice(0,10).map((g,i)=>`<div class="tool-row">
+      <div><b>${esc(g.white||"White")} vs ${esc(g.black||"Black")}</b><div class="history-date">${esc(g.date||"")} • ${esc(g.reason||"")}</div></div>
+      <div class="tool-actions"><button class="small" data-replay="${i}">▶ Replay</button><button class="small" data-pgn="${i}">📥 PGN</button></div>
+    </div>`).join("");
+    el.querySelectorAll("[data-replay]").forEach(b=>b.onclick=()=>{const g=h[+b.dataset.replay];openReplay(g.moves||[],`${g.white||"White"} vs ${g.black||"Black"}`)});
+    el.querySelectorAll("[data-pgn]").forEach(b=>b.onclick=()=>{const g=h[+b.dataset.pgn];downloadText("desk-chess-"+Date.now()+".pgn",pgnFromMoves(g.moves||[],g.white,g.black,g.result||"*"))});
+  }
+
+  /* ---------- Online draw / takeback / rematch ---------- */
+  async function offerDraw(){
+    if(gameMode!=="online"||!currentGameId||window.__onlineGameFinished)return;
+    await db.collection("games").doc(currentGameId).update({drawOfferBy:uid()}).catch(()=>{});
+    statusLine.textContent="Draw offer sent.";
+  }
+  async function takeback(){
+    if(gameMode!=="online"||!currentGameId||window.__onlineGameFinished)return;
+    await db.collection("games").doc(currentGameId).update({takebackRequestBy:uid()}).catch(()=>{});
+    statusLine.textContent="Takeback request sent.";
+  }
+  async function rematch(){
+    if(gameMode!=="online"||!currentGameId)return;
+    const s=await db.collection("games").doc(currentGameId).get().catch(()=>null); if(!s||!s.exists)return;
+    const g=s.data()||{}, oppUid=g.whiteUid===uid()?g.blackUid:g.whiteUid, oppName=g.whiteUid===uid()?g.blackUsername:g.whiteUsername;
+    if(!oppUid)return;
+    const ref=await db.collection("games").add({
+      whiteUid:uid(),whiteUsername:uname(),blackUid:oppUid,blackUsername:oppName,status:"invited",
+      invitedBy:uid(),moves:[],resultReason:null,winner:null,timeMinutes:g.timeMinutes||10,
+      whiteTimeMs:gameTimeMs(),blackTimeMs:gameTimeMs(),turnStartedAt:null,createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+      rematchOf:currentGameId
+    });
+    statusLine.textContent="Rematch request sent to "+oppName+".";
+    logToSheet("Game Invites",["Challenger","Opponent","Type","At"],[uname(),oppName,"Rematch",nowStr()]);
+  }
+
+  q("btnDrawOffer")?.addEventListener("click",offerDraw);
+  q("btnTakeback")?.addEventListener("click",takeback);
+  q("btnRematch")?.addEventListener("click",rematch);
+  q("btnPgn")?.addEventListener("click",downloadCurrentPgn);
+  q("btnReplay")?.addEventListener("click",()=>openReplay(currentMoves(),"Current Game Replay"));
+  q("replayClose")?.addEventListener("click",()=>q("replayOverlay").classList.remove("show"));
+  q("replayPrev")?.addEventListener("click",()=>{replayState.index=Math.max(0,replayState.index-1);drawReplay()});
+  q("replayNext")?.addEventListener("click",()=>{replayState.index=Math.min(replayState.moves.length,replayState.index+1);drawReplay()});
+
+  /* ---------- Save local game history + cloud result ---------- */
+  function saveFinishedGame(reason,winner){
+    const moves=currentMoves();
+    const key=[currentGameId||gameMode,reason,winner,moves.length].join("|");
+    const h=getHistory();
+    if(!h.some(x=>x.key===key)){
+      h.unshift({key,date:nowStr(),mode:gameMode,white:q("whiteName")?.textContent||"White",black:q("blackName")?.textContent||"Black",
+        winner:winner||"",reason:reason||"Game finished",result:winner===q("whiteName")?.textContent?"1-0":winner===q("blackName")?.textContent?"0-1":"1/2-1/2",moves});
+      saveHistory(h);
+    }
+    renderGameTools();
+  }
+
+  /* Wrap result popup so local games also update profile stats. */
+  if(typeof originalShowResult==="function"){
+    window.showResultCelebration=function(winnerName,reason,message){
+      originalShowResult(winnerName,reason,message);
+      const white=q("whiteName")?.textContent||"White", black=q("blackName")?.textContent||"Black";
+      saveFinishedGame(reason,winnerName);
+      if(gameMode==="local"){
+        const r=winnerName===white?"win":winnerName===black?"loss":"draw";
+        updateMyStats(r,1200);
+      } else if(gameMode==="bot"){
+        const r=winnerName===white?"win":"loss";
+        updateMyStats(r,1200);
+      }
+    };
+  }
+
+  /* ---------- Terminal-state listener for online games ---------- */
+  function attachUltimateGameListener(){
+    if(!currentGameId || gameMode!=="online" || !window.db)return;
+    const gameId=currentGameId;
+    db.collection("games").doc(gameId).onSnapshot(s=>{
+      if(!s.exists)return;
+      const g=s.data()||{};
+      if(g.drawOfferBy && g.drawOfferBy!==uid() && g.status==="active"){
+        if(confirm("Opponent offered a draw. Accept?")){
+          db.collection("games").doc(gameId).update({status:"draw",winner:null,resultReason:"Draw by agreement"});
+        } else {
+          db.collection("games").doc(gameId).update({drawOfferBy:null});
+        }
+      }
+      if(g.takebackRequestBy && g.takebackRequestBy!==uid() && g.status==="active"){
+        if(confirm("Opponent requested a takeback. Accept?")){
+          db.collection("games").doc(gameId).update({takebackAccepted:true,takebackRequestBy:null});
+        } else db.collection("games").doc(gameId).update({takebackRequestBy:null});
+      }
+      if(["timeout","checkmate","resigned","draw","abandoned"].includes(g.status)){
+        const winnerName=g.winner===g.whiteUid?g.whiteUsername:g.winner===g.blackUid?g.blackUsername:"";
+        saveFinishedGame(g.resultReason||g.status,winnerName);
+        const result=resultForMe(g.winner,g.status);
+        recordCloudResult(g.winner,g.status,gameId+"|"+g.status+"|"+(g.winner||"draw"),1200);
+        q("btnDrawOffer")?.setAttribute("disabled","disabled");
+        q("btnTakeback")?.setAttribute("disabled","disabled");
+      }
+    });
+  }
+  const oldOpenOnlineGame=window.openOnlineGame;
+  if(typeof oldOpenOnlineGame==="function"){
+    window.openOnlineGame=async function(){
+      const r=await oldOpenOnlineGame.apply(this,arguments);
+      setTimeout(attachUltimateGameListener,500);
+      return r;
+    };
+  }
+
+  /* ---------- Init ---------- */
+  const oldShowLobby=window.showLobby;
+  if(typeof oldShowLobby==="function"){
+    window.showLobby=function(){
+      oldShowLobby.apply(this,arguments);
+      setTimeout(loadProfile,500);
+    };
+  }
+  q("btnRefreshLeaderboard")?.addEventListener("click",renderLeaderboard);
+
+  window.addEventListener("load",()=>setTimeout(loadProfile,1000));
+
+  /* Add stats-aware result hooks to existing terminal functions where available. */
+  const oldCheckTimeout=window.checkOnlineTimeout;
+  if(typeof oldCheckTimeout==="function"){
+    window.checkOnlineTimeout=function(){
+      const r=oldCheckTimeout.apply(this,arguments);
+      setTimeout(()=>{if(gameMode==="online"&&currentGameId)attachUltimateGameListener()},250);
+      return r;
+    };
+  }
+
+})();
+</script>
+
 </body>
 </html>
