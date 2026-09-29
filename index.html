@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desk Chess Online</title>
+<title>Kundan's Chess Online</title>
 <script id="bugfix-v2-helpers">
 (function(){
   window.__showGameExitNotice=function(message){
@@ -650,6 +650,7 @@ input:focus{
     .live-players-list{grid-template-columns:1fr;}
   }
 
+
 </style>
 <style id="bugfix-v2-styles">
 .game-exit-notice{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:9999;
@@ -700,7 +701,6 @@ box-shadow:0 10px 30px rgba(0,0,0,.25);font-weight:600;text-align:center}
 .theme-tile .swatch.azure{background:linear-gradient(135deg,#5ee7c5,#8aa8ff);}
 .theme-tile .swatch.wood{background:linear-gradient(135deg,#c9a876,#6b4a34 55%,#3d2b1f);}
 .theme-tile .swatch.neon{background:linear-gradient(135deg,#ff2bd6,#05030f 45%,#00fff2);}
-.theme-tile .swatch.mdark{background:linear-gradient(135deg,#3a3a3e,#1a1a1c 60%,#0a0a0b);}
 .theme-tile .swatch.glass{background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(159,216,255,.5) 60%,rgba(201,182,255,.4));}
 
 body[data-theme="wood"]{
@@ -729,19 +729,6 @@ body[data-theme="neon"] button.primary{background:linear-gradient(135deg,#00fff2
 body[data-theme="neon"] .piece{filter:drop-shadow(0 0 6px rgba(0,255,242,.55));}
 body[data-theme="neon"] .piece.black-p{filter:drop-shadow(0 0 6px rgba(255,43,214,.6));}
 
-body[data-theme="mdark"]{
-  --bg-1:#101012; --bg-2:#0c0c0d; --accent:#e6e6e6; --accent-2:#9a9a9a;
-  --board-light:#2c2c30; --board-dark:#17171a; --board-edge:#000; --line:rgba(255,255,255,.08);
-}
-body[data-theme="mdark"] .board-wrap{background:#151517; box-shadow:none; border:1px solid rgba(255,255,255,.08);}
-body[data-theme="mdark"] #board{border-color:#000; box-shadow:none;}
-body[data-theme="mdark"] .card{background:#141416; border-color:rgba(255,255,255,.07); box-shadow:none; backdrop-filter:none;}
-body[data-theme="mdark"] .masthead h1{color:#f2f2f2; text-shadow:none;}
-body[data-theme="mdark"] .masthead h1::before{color:#e6e6e6;}
-body[data-theme="mdark"] button{border-color:rgba(255,255,255,.18); color:#e6e6e6; background:transparent;}
-body[data-theme="mdark"] button.primary{background:#e6e6e6; color:#101012; box-shadow:none;}
-body[data-theme="mdark"] .piece{filter:none;}
-body[data-theme="mdark"] .sq .coord{opacity:.4;}
 
 body[data-theme="glass"]{
   --bg-1:#0e2038; --bg-2:#132a44; --accent:#9fd8ff; --accent-2:#c9b6ff;
@@ -755,16 +742,6 @@ body[data-theme="glass"] button{border-color:rgba(255,255,255,.35); background:r
 body[data-theme="glass"] button.primary{background:linear-gradient(135deg,rgba(159,216,255,.9),rgba(201,182,255,.9)); color:#0e2038;}
 body[data-theme="glass"] .sq.light{box-shadow:inset 0 1px 0 rgba(255,255,255,.5);}
 body[data-theme="glass"] .sq.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.15);}
-body[data-theme="bw"]{
-  --bg-1:#111; --bg-2:#202020; --accent:#fff; --accent-2:#bbb;
-  --board-light:#fff; --board-dark:#111; --board-edge:#000; --line:rgba(255,255,255,.14);
-}
-body[data-theme="bw"] .board-wrap{background:#090909;border:1px solid #444;box-shadow:0 22px 50px rgba(0,0,0,.55);}
-body[data-theme="bw"] #board{border-color:#000;}
-body[data-theme="bw"] .sq.light{background:#f7f7f7;}
-body[data-theme="bw"] .sq.dark{background:#171717;}
-body[data-theme="bw"] .piece.white-p{color:#fff;-webkit-text-stroke:1px #000;}
-body[data-theme="bw"] .piece.black-p{color:#000;-webkit-text-stroke:1px #fff;}
 body[data-theme="ocean"]{
   --bg-1:#061a2b; --bg-2:#082b45; --accent:#5ee7ff; --accent-2:#78a9ff;
   --board-light:#dff7ff; --board-dark:#23637d; --board-edge:#0a2435; --line:rgba(94,231,255,.18);
@@ -776,9 +753,327 @@ body[data-theme="forest"]{
 }
 body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,#0b2518);border-color:rgba(118,230,168,.3);}
 
-.theme-tile .swatch.bw{background:linear-gradient(90deg,#fff 0 50%,#111 50%);}
 .theme-tile .swatch.ocean{background:linear-gradient(135deg,#dff7ff,#23637d,#071b2c);}
 .theme-tile .swatch.forest{background:linear-gradient(135deg,#e9f5e8,#2e6548,#10271b);}
+.theme-tile .swatch.redwhite{background:linear-gradient(135deg,#ffffff 0 50%,#c62828 50%);}
+body[data-theme="redwhite"]{
+  --bg-1:#fffaf0;
+  --bg-2:#f6e7d1;
+  --surface:#fffdf8;
+  --surface-2:#fff5e8;
+  --surface-3:#f3dfc8;
+  --line:rgba(112,22,22,.18);
+  --text:#2b1512;
+  --muted:#735550;
+  --accent:#8f1d24;
+  --accent-2:#b58a3b;
+  --board-light:#f4e5c5;
+  --board-dark:#8e2028;
+  --board-edge:#b58a3b;
+  --danger:#9b1018;
+  --ok:#276b42;
+  background:
+    radial-gradient(circle at 18% 8%,rgba(255,255,255,.95),transparent 30%),
+    radial-gradient(circle at 88% 92%,rgba(142,32,40,.16),transparent 34%),
+    linear-gradient(135deg,#fffaf0 0%,#f8ead7 48%,#efd6bd 100%);
+  color:#2b1512;
+}
+body[data-theme="redwhite"] .masthead{border-bottom-color:#8f1d24;}
+body[data-theme="redwhite"] .masthead h1{
+  color:#8f1d24;
+  text-shadow:0 2px 10px rgba(143,29,36,.15);
+}
+body[data-theme="redwhite"] .masthead .userbadge,
+body[data-theme="redwhite"] .hint,
+body[data-theme="redwhite"] .empty,
+body[data-theme="redwhite"] .field label,
+body[data-theme="redwhite"] .row-label{color:#735550;}
+body[data-theme="redwhite"] .card{
+  background:linear-gradient(145deg,rgba(255,253,248,.98),rgba(255,245,232,.96));
+  border:1px solid rgba(143,29,36,.20);
+  box-shadow:0 12px 30px rgba(79,25,18,.10),inset 0 1px 0 rgba(255,255,255,.9);
+}
+body[data-theme="redwhite"] .card h2{color:#74151d;}
+body[data-theme="redwhite"] button{
+  background:linear-gradient(180deg,#fffdf8,#f8ead8);
+  color:#74151d;
+  border-color:#9b3037;
+  box-shadow:0 3px 8px rgba(90,24,20,.10),inset 0 1px 0 rgba(255,255,255,.9);
+}
+body[data-theme="redwhite"] button:hover{background:linear-gradient(180deg,#9b3037,#74151d);color:#fffaf0;}
+body[data-theme="redwhite"] button.primary,
+body[data-theme="redwhite"] .authTabs button.active{
+  background:linear-gradient(135deg,#9b3037,#74151d);
+  color:#fffaf0;border-color:#641017;
+  box-shadow:0 5px 14px rgba(116,21,29,.22),inset 0 1px 0 rgba(255,255,255,.2);
+}
+body[data-theme="redwhite"] button.primary:hover{background:linear-gradient(135deg,#b33a42,#74151d);color:#fff;}
+body[data-theme="redwhite"] input{
+  background:#fffdf8;color:#2b1512;border-color:rgba(143,29,36,.30);
+}
+body[data-theme="redwhite"] input::placeholder{color:#9b7a73;}
+body[data-theme="redwhite"] input:focus{outline:2px solid rgba(143,29,36,.25);box-shadow:0 0 0 4px rgba(143,29,36,.08);}
+body[data-theme="redwhite"] .badge{background:#f3dfc8;color:#74151d;border:1px solid rgba(143,29,36,.22);}
+body[data-theme="redwhite"] .bot-tile{background:#fffdf8;border-color:rgba(143,29,36,.22);}
+body[data-theme="redwhite"] .bot-tile:hover{background:#fff1e7;border-color:#9b3037;}
+body[data-theme="redwhite"] .bot-tile .lvl{color:#8f1d24;}
+
+/* Royal red-and-ivory board inspired by the supplied reference image. */
+body[data-theme="redwhite"] .board-wrap{
+  width:min(100%,700px);
+  padding:18px;
+  border-radius:12px;
+  background:
+    linear-gradient(135deg,#5b1018 0%,#a66f2e 16%,#e4c27d 23%,#7b1720 39%,#c49a4c 58%,#6c1119 78%,#d7b56b 100%);
+  border:2px solid #d8b66b;
+  box-shadow:
+    0 30px 65px rgba(66,20,12,.38),
+    0 0 0 3px #5f1119,
+    0 0 0 5px #c59a4d,
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 -2px 0 rgba(60,10,10,.35);
+}
+body[data-theme="redwhite"] #board{
+  border:5px solid #5f1119;
+  border-radius:3px;
+  box-shadow:
+    0 10px 28px rgba(55,8,8,.42),
+    0 0 0 2px #d2ad63,
+    inset 0 0 0 1px rgba(255,244,210,.65);
+}
+body[data-theme="redwhite"] .sq.light{
+  background:
+    linear-gradient(135deg,#fff7e4 0%,#f1dfbb 52%,#e7d0a5 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),inset 0 -8px 15px rgba(133,79,35,.08);
+}
+body[data-theme="redwhite"] .sq.dark{
+  background:
+    linear-gradient(135deg,#a83238 0%,#821d26 52%,#68131b 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,190,160,.10),inset 0 -8px 15px rgba(45,0,0,.16);
+}
+body[data-theme="redwhite"] .sq.light .coord{color:#7a3d2c;}
+body[data-theme="redwhite"] .sq.dark .coord{color:#ffe8d0;}
+body[data-theme="redwhite"] .piece{
+  font-size:min(10vw,68px);
+  filter:drop-shadow(0 4px 2px rgba(45,8,5,.38));
+}
+body[data-theme="redwhite"] .piece.white-p{
+  color:#fffaf0;
+  -webkit-text-stroke:1.2px #b28a42;
+  text-shadow:
+    0 1px 0 #fff,
+    0 2px 0 #ead6a8,
+    0 5px 9px rgba(70,20,10,.40);
+}
+body[data-theme="redwhite"] .piece.black-p{
+  color:#7d1720;
+  -webkit-text-stroke:1px #4b0a11;
+  text-shadow:
+    0 1px 0 #c99d51,
+    0 4px 8px rgba(45,0,0,.45);
+}
+body[data-theme="redwhite"] .sq.selected{
+  box-shadow:inset 0 0 0 4px #e0ad45,inset 0 0 26px rgba(255,210,90,.35);
+}
+body[data-theme="redwhite"] .sq.last-move{
+  box-shadow:inset 0 0 0 4px #e7a52d,inset 0 0 22px rgba(231,165,45,.25);
+}
+body[data-theme="redwhite"] .sq.in-check{
+  box-shadow:inset 0 0 0 4px #ffcf45,inset 0 0 32px rgba(190,0,0,.48);
+}
+body[data-theme="redwhite"] .sq .dot{background:rgba(255,232,178,.75);box-shadow:0 0 0 3px rgba(103,12,20,.35);}
+body[data-theme="redwhite"] .sq .ring{border-color:rgba(255,218,137,.82);box-shadow:0 0 0 2px rgba(100,10,18,.35);}
+body[data-theme="redwhite"] .player.active{background:linear-gradient(90deg,rgba(143,29,36,.14),rgba(181,138,59,.08));box-shadow:0 0 0 1px rgba(143,29,36,.30);}
+body[data-theme="redwhite"] .player.white .swatch{background:#fff8e9;border:2px solid #b58a3b;}
+body[data-theme="redwhite"] .player.black .swatch{background:#7d1720;border:2px solid #4b0a11;}
+body[data-theme="redwhite"] .status-line{color:#6f4540;}
+body[data-theme="redwhite"] .status-line.alert{color:#8f1018;}
+body[data-theme="redwhite"] .live-win{background:#fff0e5;border-color:rgba(143,29,36,.22);color:#74151d;}
+body[data-theme="redwhite"] .tournament-card{background:linear-gradient(145deg,#fffdf8,#fff0e4);}
+body[data-theme="redwhite"] .theme-tile{background:#fffdf8;border-color:rgba(143,29,36,.18);}
+body[data-theme="redwhite"] .theme-tile:hover{border-color:#b58a3b;box-shadow:0 12px 28px rgba(120,20,20,.12);}
+body[data-theme="redwhite"] .theme-tile.active{border-color:#b58a3b;background:#fff3df;box-shadow:0 0 0 2px #b58a3b inset,0 8px 20px rgba(100,20,20,.10);}
+body[data-theme="redwhite"] .theme-tile .tlabel{color:#5d151b;}
+body[data-theme="redwhite"] .list-row{border-bottom-color:rgba(143,29,36,.10);}
+body[data-theme="redwhite"] .promo-overlay{background:rgba(48,0,5,.58);}
+body[data-theme="redwhite"] .promo-box{background:#fffdf8;border-color:#b58a3b;color:#2b1512;box-shadow:0 20px 50px rgba(80,0,0,.28);}
+body[data-theme="redwhite"] .promo-box p{color:#5b3833;}
+body[data-theme="redwhite"] .promo-choices button{background:#fffdf8;color:#5d151b;border:1px solid #b58a3b;}
+body[data-theme="redwhite"] .promo-choices button:hover{background:#8f1d24;color:#fffaf0;}
+body[data-theme="redwhite"] #movelist td{color:#5b3b36;}
+body[data-theme="redwhite"] #movelist tr:nth-child(even){background:rgba(143,29,36,.045);}
+body[data-theme="redwhite"] #movelist tr:nth-child(even){background:rgba(198,40,40,.045);}
+
+
+/* ===== RED & WHITE ROYAL BOARD — FINAL VISUAL OVERRIDES ===== */
+body[data-theme="redwhite"]{
+  --bg-1:#fffdf8;
+  --bg-2:#f4e9dc;
+  --surface:#fffefa;
+  --surface-2:#fff7ee;
+  --surface-3:#f1e2d3;
+  --line:rgba(102,20,28,.16);
+  --text:#261719;
+  --muted:#70565a;
+  --accent:#8b1e2d;
+  --accent-2:#c49a52;
+  --board-light:#f7f0df;
+  --board-dark:#8b1e2d;
+  --board-edge:#b88943;
+  background:
+    radial-gradient(circle at 12% 0%,#ffffff 0%,transparent 34%),
+    radial-gradient(circle at 92% 100%,rgba(139,30,45,.12),transparent 36%),
+    linear-gradient(135deg,#fffdf8 0%,#f8eee4 55%,#f0ded1 100%);
+  color:#261719;
+}
+
+/* Keep the board elegant instead of overloading it with red-on-red. */
+body[data-theme="redwhite"] .board-wrap{
+  width:min(100%,700px);
+  padding:14px;
+  border-radius:16px;
+  background:
+    linear-gradient(135deg,#5e1721 0%,#8b1e2d 22%,#c49a52 22.5%,#e5c983 34%,#8b1e2d 34.5%,#6d1722 66%,#c49a52 66.5%,#e5c983 78%,#711925 78.5%,#4e111a 100%);
+  border:2px solid #d8b56c;
+  box-shadow:
+    0 22px 48px rgba(58,17,23,.28),
+    0 0 0 3px #701824,
+    0 0 0 5px #c49a52,
+    inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+body[data-theme="redwhite"] #board{
+  border:5px solid #6d1722;
+  border-radius:4px;
+  background:#f7f0df;
+  box-shadow:
+    0 8px 24px rgba(44,12,17,.35),
+    0 0 0 2px #d3ae63,
+    inset 0 0 0 1px rgba(255,255,255,.7);
+}
+
+body[data-theme="redwhite"] .sq.light{
+  background:linear-gradient(145deg,#fffaf0 0%,#f7f0df 62%,#eadfc8 100%);
+  box-shadow:inset 0 0 0 1px rgba(125,91,53,.08);
+}
+body[data-theme="redwhite"] .sq.dark{
+  background:linear-gradient(145deg,#9a2b3a 0%,#8b1e2d 58%,#741624 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 -7px 14px rgba(45,0,8,.14);
+}
+
+/* High-contrast pieces: ivory/white side + charcoal side. No red piece on red square. */
+body[data-theme="redwhite"] .piece{
+  font-size:min(10vw,68px);
+  line-height:1;
+  filter:drop-shadow(0 3px 2px rgba(42,15,18,.35));
+}
+body[data-theme="redwhite"] .piece.white-p{
+  color:#fffaf0;
+  -webkit-text-stroke:1.4px #8b6a35;
+  text-shadow:0 1px 0 #fff,0 2px 0 #ead6a8,0 5px 9px rgba(48,16,20,.38);
+}
+body[data-theme="redwhite"] .piece.black-p{
+  color:#292326;
+  -webkit-text-stroke:1.2px #c49a52;
+  text-shadow:0 1px 0 #080708,0 4px 8px rgba(30,5,8,.45);
+}
+
+/* Extra separation from both square colors. */
+body[data-theme="redwhite"] .sq.dark .piece.white-p{
+  -webkit-text-stroke:1.5px #f1cf82;
+  text-shadow:0 1px 0 #fff,0 4px 8px rgba(35,4,9,.55);
+}
+body[data-theme="redwhite"] .sq.light .piece.black-p{
+  color:#332c2d;
+  -webkit-text-stroke:1.2px #9b712f;
+}
+
+body[data-theme="redwhite"] .sq .coord{
+  font-weight:900;
+  text-shadow:none;
+}
+body[data-theme="redwhite"] .sq.light .coord{color:#6f3c35;}
+body[data-theme="redwhite"] .sq.dark .coord{color:#fff4df;}
+
+/* Clean move markers: gold, not another competing red. */
+body[data-theme="redwhite"] .sq.selected{
+  box-shadow:inset 0 0 0 4px #e0b54f,inset 0 0 20px rgba(224,181,79,.34);
+}
+body[data-theme="redwhite"] .sq.last-move{
+  box-shadow:inset 0 0 0 4px #d8a63e,inset 0 0 18px rgba(216,166,62,.22);
+}
+body[data-theme="redwhite"] .sq.in-check{
+  box-shadow:inset 0 0 0 4px #f0bd42,inset 0 0 28px rgba(139,30,45,.45);
+}
+body[data-theme="redwhite"] .sq .dot{
+  background:#d6a84b;
+  box-shadow:0 0 0 3px rgba(74,18,25,.28);
+}
+body[data-theme="redwhite"] .sq .ring{
+  border-color:#d6a84b;
+  box-shadow:0 0 0 2px rgba(74,18,25,.25);
+}
+
+/* Make every text/button combination readable. */
+body[data-theme="redwhite"] .card,
+body[data-theme="redwhite"] .theme-tile,
+body[data-theme="redwhite"] .bot-tile,
+body[data-theme="redwhite"] .list-row,
+body[data-theme="redwhite"] .player{
+  color:#261719;
+}
+body[data-theme="redwhite"] .card h2,
+body[data-theme="redwhite"] .row-label,
+body[data-theme="redwhite"] .field label,
+body[data-theme="redwhite"] .hint,
+body[data-theme="redwhite"] .empty{
+  color:#653f44;
+}
+body[data-theme="redwhite"] button:not(.primary){
+  background:#fffdf8;
+  color:#741b29;
+  border-color:#a96e72;
+}
+body[data-theme="redwhite"] button:not(.primary):hover{
+  background:#f5e5d8;
+  color:#5c1320;
+}
+body[data-theme="redwhite"] button.primary{
+  background:linear-gradient(135deg,#9b2838,#761725);
+  color:#fffaf0;
+  border-color:#5e111c;
+}
+body[data-theme="redwhite"] input,
+body[data-theme="redwhite"] select,
+body[data-theme="redwhite"] textarea{
+  background:#fffdf8;
+  color:#261719;
+  border-color:#c8a7a0;
+}
+body[data-theme="redwhite"] input::placeholder{color:#8a6b6d;}
+body[data-theme="redwhite"] .live-win{background:#f6e8d7;color:#741b29;border-color:#d7b27b;}
+body[data-theme="redwhite"] .status-line{color:#653f44;}
+body[data-theme="redwhite"] .status-line.alert{color:#8b1725;}
+
+/* Player strips: ivory background with clear burgundy active state. */
+body[data-theme="redwhite"] .player.active{
+  background:linear-gradient(90deg,rgba(139,30,45,.12),rgba(196,154,82,.10));
+  box-shadow:0 0 0 1px rgba(139,30,45,.28);
+}
+body[data-theme="redwhite"] .player.white .swatch{background:#fffaf0;border:2px solid #c49a52;}
+body[data-theme="redwhite"] .player.black .swatch{background:#292326;border:2px solid #c49a52;}
+
+/* Captured pieces also stay readable and visually consistent. */
+body[data-theme="redwhite"] .captured .white-p{color:#fffaf0;-webkit-text-stroke:1px #8b6a35;}
+body[data-theme="redwhite"] .captured .black-p{color:#292326;-webkit-text-stroke:1px #c49a52;}
+
+/* Theme preview should communicate the actual board palette. */
+body[data-theme="redwhite"] .theme-tile.active{
+  border-color:#c49a52;
+  background:#fff8ed;
+  box-shadow:0 0 0 2px #c49a52 inset,0 8px 22px rgba(91,20,28,.10);
+}
+
 
 .live-win{
   min-width:44px;text-align:center;padding:4px 7px;border-radius:999px;
@@ -868,16 +1163,63 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
 .replay-square{display:grid;place-items:center;font-size:clamp(22px,6vw,52px);position:relative}.replay-square.light{background:#eef4e8}.replay-square.dark{background:#4b7d6b}
 .replay-controls{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px}.replay-controls div{min-width:150px;text-align:center;font-size:12px;color:#d9e6ee}
 .replay-quality{text-align:center;color:#9fb4c4;font-size:11px;margin-top:10px}
+.friends-card,.tournament-card{padding:16px;}
+.friends-card .addfriend-row{gap:6px;}
+.friends-card .addfriend-row input{min-width:0;}
+.friends-card #requestsList,.friends-card #friendsList{max-height:120px;overflow:auto;}
+.tournament-card{margin-top:10px;}
+.tournament-card .btn-row{gap:8px;}
+.tournament-card .btn-row button{padding:9px 12px;font-size:12px;}
+.tournament-card .status-line{margin-top:10px;font-size:12px;}
+.live-player-state{font-size:10px;opacity:.72;}
+.live-player-loading{opacity:.55;text-align:center;padding:8px;}
+.match-number-top{display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:999px;background:rgba(94,231,197,.12);border:1px solid rgba(94,231,197,.3);font-weight:800;}
+.live-players-tools{display:flex;align-items:center;gap:8px;margin:10px 0 8px;flex-wrap:wrap;}
+.live-player-search{flex:1 1 220px;min-width:160px;padding:9px 11px;border-radius:10px;}
+.live-refresh-btn{white-space:nowrap;}
+.live-player-loading{padding:9px 10px;border:1px dashed rgba(255,255,255,.10);border-radius:9px;margin-top:8px;}
+.brightness-control{display:flex;align-items:center;gap:9px;margin-top:10px;padding:9px 11px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.025);}
+.brightness-control .brightness-icon{font-size:15px;line-height:1;}
+.brightness-control input[type=range]{flex:1;accent-color:var(--accent);height:4px;}
+.brightness-value{min-width:42px;text-align:right;font-size:11px;font-weight:800;color:var(--muted);}
+.brightness-control .brightness-low,.brightness-control .brightness-high{font-size:10px;color:var(--muted);}
+@media(max-width:600px){.live-players-tools{align-items:stretch}.live-player-search{flex-basis:100%}.brightness-control{gap:6px;}}
+
 @media(max-width:700px){.profile-stat-grid{grid-template-columns:repeat(2,1fr)}.leader-row{grid-template-columns:30px 1fr auto}.leader-row .leader-meta{display:none}.replay-board{width:90vw}}
 </style>
 
+<style id="takeback-toast-styles">
+.takeback-toast{position:fixed;right:22px;top:22px;z-index:10050;width:min(350px,calc(100vw - 28px));padding:18px;background:#17251f;color:#f6f0df;border:1px solid #c5a66a;border-radius:14px;box-shadow:0 18px 55px rgba(0,0,0,.48);display:none}
+.takeback-toast.show,.takeback-toast:not([hidden]){display:block;animation:takebackIn .22s ease-out}
+.takeback-toast[hidden]{display:none!important}
+.takeback-toast h3{margin:0 0 7px;color:#e2c783;font-size:16px}
+.takeback-toast p{margin:0 0 14px;color:#e7e1d4;font-size:13px;line-height:1.45}
+.takeback-toast .takeback-actions{display:flex;gap:9px}
+.takeback-toast .takeback-actions button{flex:1}
+.takeback-toast .takeback-accept{background:#c5a66a;color:#18221c;border-color:#c5a66a;font-weight:800}
+.takeback-toast .takeback-decline{background:transparent;color:#f1e7d0;border-color:#788579}
+@keyframes takebackIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:520px){.takeback-toast{right:14px;top:14px}}
+
+/* Takeback request popup: fixed to the right, with reliable hidden/show behavior. */
+.takeback-toast{position:fixed;right:22px;top:92px;z-index:10050;width:min(350px,calc(100vw - 28px));padding:16px 18px;border:1px solid #c5a66a;border-radius:14px;background:#17251f;color:#f6f0df;box-shadow:0 18px 55px rgba(0,0,0,.45);font:inherit;}
+.takeback-toast[hidden]{display:none!important;}
+.takeback-toast-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:850;color:#e2c783;}
+.takeback-toast p{margin:12px 0 16px;color:#e7e1d4;line-height:1.45;font-size:13px;}
+.takeback-toast .takeback-actions{display:flex;gap:9px;}
+.takeback-toast .takeback-actions button{flex:1;}
+.takeback-toast .takeback-actions .primary{background:#c5a66a;color:#17251f;border-color:#c5a66a;font-weight:800;}
+.takeback-toast .takeback-close{padding:2px 8px;background:transparent;border-color:#788579;color:#f6f0df;}
+@media(max-width:520px){.takeback-toast{right:12px;top:72px;width:calc(100vw - 24px);}}
+
+</style>
 </head>
 <body>
 <div class="app">
 
   <!-- ============ AUTH SCREEN ============ -->
   <div id="authScreen">
-    <div class="masthead"><h1>Desk Chess</h1></div>
+    <div class="masthead"><h1>Kundan's Chess</h1></div>
     <div class="card">
       <div class="authTabs">
         <button id="tabLogin" class="active">Log in</button>
@@ -903,7 +1245,7 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
   <!-- ============ LOBBY SCREEN ============ -->
   <div id="lobbyScreen" class="hidden">
     <div class="masthead">
-      <h1>Desk Chess</h1>
+      <h1>Kundan's Chess</h1>
       <div class="userbadge">Signed in as <b id="myUsernameLabel"></b> &nbsp;•&nbsp; <button class="small" id="btnLogout">Log out</button></div>
     </div>
 
@@ -913,9 +1255,7 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
         <div class="theme-tile" data-theme="azure"><div class="swatch azure"></div><div class="tlabel">Azure (Default)</div></div>
         <div class="theme-tile" data-theme="wood"><div class="swatch wood"></div><div class="tlabel">Classic Wooden</div></div>
         <div class="theme-tile" data-theme="neon"><div class="swatch neon"></div><div class="tlabel">Cyberpunk Neon</div></div>
-        <div class="theme-tile" data-theme="mdark"><div class="swatch mdark"></div><div class="tlabel">Minimalist Dark</div></div>
         <div class="theme-tile" data-theme="glass"><div class="swatch glass"></div><div class="tlabel">3D Glass</div></div>
-        <div class="theme-tile" data-theme="bw"><div class="swatch bw"></div><div class="tlabel">Black & White</div></div>
         <div class="theme-tile" data-theme="ocean"><div class="swatch ocean"></div><div class="tlabel">Ocean Blue</div></div>
         <div class="theme-tile" data-theme="forest"><div class="swatch forest"></div><div class="tlabel">Forest Green</div></div>
       </div>
@@ -974,6 +1314,10 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
         <span>🟢 Players Online Now</span>
         <span class="online-count" id="onlineCount">0 online</span>
       </div>
+      <div class="live-players-tools">
+        <input class="live-player-search" id="livePlayerSearch" type="search" autocomplete="off" placeholder="Search real player by name…">
+        <button class="small live-refresh-btn" id="btnRefreshLivePlayers" type="button">↻ Refresh</button>
+      </div>
       <div id="livePlayersList" class="live-players-list">
         <div class="empty">Looking for online players…</div>
       </div>
@@ -988,13 +1332,13 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
       <div class="tournament-head">
         <div>
           <h2>🏆 Tournaments</h2>
-          <div class="hint">Create your own tournament or let the computer generate a bot tournament.</div>
+          <div class="hint">Create a quick knockout tournament and start playing from the game screen.</div>
         </div>
         <span class="badge">NEW</span>
       </div>
       <div class="btn-row">
-        <button class="primary" id="btnCreateTournament">Create Player Tournament</button>
-        <button id="btnComputerTournament">Computer Tournament</button>
+        <button class="primary" id="btnCreateTournament">Create Tournament</button>
+        <button id="btnComputerTournament">Quick Bot Tournament</button>
       </div>
       <div id="tournamentStatus" class="status-line"></div>
     </div>
@@ -1036,18 +1380,9 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
       </div>
     </div>
 
-    <div class="card">
-      <div class="history-head">
-        <div>
-          <h2>📚 Game Tools</h2>
-          <div class="hint">Replay your saved games, download PGN, and review move quality.</div>
-        </div>
-      </div>
-      <div id="gameToolsList"><div class="empty">Finish a game to unlock replay and PGN tools.</div></div>
-    </div>
 
     <div class="grid2">
-      <div class="card">
+      <div class="card friends-card">
         <h2>Friends</h2>
         <div class="addfriend-row">
           <input id="addFriendInput" placeholder="Add friend by username">
@@ -1068,12 +1403,8 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
 
       <div class="card">
         <h2>Games</h2>
-        <div class="row-label">Invites</div>
-        <div id="invitesList"><div class="empty">No invites.</div></div>
-        <div style="margin-top:14px;">
-          <div class="row-label">In progress</div>
-          <div id="activeGamesList"><div class="empty">No active games.</div></div>
-        </div>
+        <div class="row-label">Recent ongoing matches</div>
+        <div id="activeGamesList"><div class="empty">No ongoing games.</div></div>
       </div>
     </div>
   </div>
@@ -1081,7 +1412,7 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
   <!-- ============ GAME SCREEN ============ -->
   <div id="gameScreen" class="hidden">
     <div class="masthead">
-      <h1>Desk Chess</h1>
+      <h1>Kundan's Chess</h1>
       <button class="small" id="btnBackToLobby">← Back to lobby</button>
     </div>
     <div class="layout">
@@ -1089,6 +1420,7 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
       <div class="side-panel">
         <div class="card">
           <h2 id="gameModeLabel">Game</h2>
+          <div class="hint match-number-top" id="matchNumberLabel">Match #—</div>
           <div class="player white" id="playerWhite">
             <div class="swatch"></div>
             <div class="name" id="whiteName">White</div>
@@ -1140,6 +1472,13 @@ body[data-theme="forest"] .board-wrap{background:linear-gradient(145deg,#3f7f5c,
             <button id="btnPgn">📥 PGN</button>
             <button id="btnReplay">▶ Replay</button>
             <button id="btnResign">Resign</button>
+          </div>
+          <div class="brightness-control" aria-label="Board brightness control">
+            <span class="brightness-low">☾</span>
+            <span class="brightness-icon">☀️</span>
+            <input id="boardBrightness" type="range" min="70" max="130" value="100" step="1" aria-label="Board brightness">
+            <span class="brightness-high">☀</span>
+            <span class="brightness-value" id="boardBrightnessValue">100%</span>
           </div>
         </div>
       </div>
@@ -1238,6 +1577,8 @@ let gameMode = null;         // 'bot' | 'online' | 'local'
 let myColor = 'w';           // for online/bot vs human context
 let botLevel = 'medium';
 let botPersonality = null;   // null | 'aggressive' | 'defensive' | 'chaotic'
+let botDisplayName = '';     // keeps the exact bot name visible throughout the match
+let activeBotDisplayName = '';
 let showThreats = false;
 const MATCH_TIME_OPTIONS = [10,20,30];
 const EXTEND_MINUTES = 5;
@@ -1365,6 +1706,7 @@ document.querySelectorAll('.bot-tiles .bot-tile').forEach(tile=>{
   tile.addEventListener('click', () => {
     botLevel = tile.dataset.level;
     botPersonality = null;
+    botDisplayName = '';
     startBotGame(botLevel);
   });
 });
@@ -1372,7 +1714,8 @@ document.querySelectorAll('#personalityTiles .bot-tile').forEach(tile=>{
   tile.addEventListener('click', () => {
     botPersonality = tile.dataset.personality;
     botLevel = 'medium';
-    startBotGame(botLevel);
+    botDisplayName = makeBotPlayerName();
+    startBotGame(botLevel, botDisplayName);
   });
 });
 document.getElementById('btnLocal2p').onclick = () => startLocalGame();
@@ -1396,6 +1739,7 @@ document.querySelectorAll('.theme-tile').forEach(tile=>{
 (function initTheme(){
   let saved = 'azure';
   try{ saved = localStorage.getItem(THEME_STORAGE_KEY) || 'azure'; }catch(e){}
+  if(saved==='mdark' || saved==='bw' || saved==='redwhite') saved='azure';
   applyTheme(saved);
 })();
 
@@ -1630,64 +1974,44 @@ function listenGamesForMe(){
 }
 function renderGameLists(){
   const all = [...gamesAsWhite, ...gamesAsBlack];
-  const invites = all.filter(g=> g.status==='invited');
-  const active = all.filter(g=> g.status==='active');
-
-  const invEl = document.getElementById('invitesList');
-  if(!invites.length){ invEl.innerHTML = '<div class="empty">No invites.</div>'; }
-  else {
-    invEl.innerHTML='';
-    invites.forEach(g=>{
-      const iAmWhite = g.whiteUid === currentUser.uid;
-      const opponent = iAmWhite ? g.blackUsername : g.whiteUsername;
-      const iInvited = g.invitedBy === currentUser.uid;
-      const row = document.createElement('div');
-      row.className = 'list-row';
-      if(iInvited){
-        row.innerHTML = `<div class="name">${escapeHtml(opponent)} <span class="badge">waiting</span></div>`;
-      } else {
-        row.innerHTML = `<div class="name">${escapeHtml(opponent)} challenged you</div>
-          <div class="actions">
-            <button class="small primary" data-act="accept">Accept</button>
-            <button class="small" data-act="decline">Decline</button>
-          </div>`;
-        row.querySelector('[data-act="accept"]').addEventListener('click', async ()=>{
-          await db.collection('games').doc(g.id).update({
-            status:'active',
-            acceptedAt:firebase.firestore.FieldValue.serverTimestamp(),
-            turnStartedAt:firebase.firestore.FieldValue.serverTimestamp()
-          });
-        });
-        row.querySelector('[data-act="decline"]').addEventListener('click', async ()=>{
-          await db.collection('games').doc(g.id).update({ status:'declined' });
-        });
-      }
-      invEl.appendChild(row);
-    });
-  }
-
+  const unique = new Map(all.map(g=>[g.id,g]));
+  const active = [...unique.values()].filter(g=>g.status==='active');
+  active.sort((a,b)=>{
+    const at=a.acceptedAt?.toMillis?.()||a.createdAt?.toMillis?.()||0;
+    const bt=b.acceptedAt?.toMillis?.()||b.createdAt?.toMillis?.()||0;
+    return bt-at;
+  });
   const actEl = document.getElementById('activeGamesList');
-  if(!active.length){ actEl.innerHTML = '<div class="empty">No active games.</div>'; }
-  else {
-    actEl.innerHTML='';
-    active.forEach(g=>{
-      const iAmWhite = g.whiteUid === currentUser.uid;
-      const opponent = iAmWhite ? g.blackUsername : g.whiteUsername;
-      const row = document.createElement('div');
-      row.className = 'list-row';
-      row.innerHTML = `<div class="name">vs ${escapeHtml(opponent)}</div>
-        <div class="actions"><button class="small primary" data-act="open">Open</button></div>`;
-      row.querySelector('[data-act="open"]').addEventListener('click', ()=> openOnlineGame(g.id));
-      actEl.appendChild(row);
-    });
-  }
+  if(!actEl) return;
+  if(!active.length){ actEl.innerHTML = '<div class="empty">No ongoing games.</div>'; return; }
+  actEl.innerHTML='';
+  active.slice(0,2).forEach(g=>{
+    const iAmWhite = g.whiteUid === currentUser.uid;
+    const opponent = iAmWhite ? g.blackUsername : g.whiteUsername;
+    const matchNo = g.matchNumber || g.id.slice(0,8).toUpperCase();
+    const row = document.createElement('div');
+    row.className = 'list-row';
+    row.innerHTML = `<div><div class="name">vs ${escapeHtml(opponent)}</div><div class="history-date">Match #${escapeHtml(matchNo)}</div></div>
+      <div class="actions"><button class="small primary" data-act="open">Open</button></div>`;
+    row.querySelector('[data-act="open"]').addEventListener('click', ()=> openOnlineGame(g.id));
+    actEl.appendChild(row);
+  });
+}
+
+function newMatchNumber(){
+  return String(Date.now()).slice(-8) + String(Math.floor(Math.random()*900+100));
+}
+
+function getMatchNumber(gameId){
+  const el=document.getElementById('matchNumberLabel');
+  return el ? (el.textContent || '').replace(/^Match #/,'') : (gameId||'').slice(0,8).toUpperCase();
 }
 
 async function challengeFriend(friendUid, friendUsername){
   const doc = await db.collection('games').add({
     whiteUid: currentUser.uid, whiteUsername: currentUser.username,
     blackUid: friendUid, blackUsername: friendUsername,
-    status: 'invited', invitedBy: currentUser.uid,
+    status: 'invited', invitedBy: currentUser.uid, matchNumber:newMatchNumber(),
     moves: [], resultReason: null, winner: null,
     timeMinutes: selectedGameMinutes,
     whiteTimeMs: gameTimeMs(),
@@ -2012,7 +2336,7 @@ function updateAll(){ renderPieces(); updateCaptured(); updateMoveList(); update
    8) MODE: LOCAL 2-PLAYER
    ============================================================ */
 function startLocalGame(){
-  gameMode='local'; currentGameId=null; detachGameListener(); gameLogged=false; resultPopupShownFor=null;
+  gameMode='local'; currentGameId=null; window.__activeMatchNumber=newMatchNumber(); detachGameListener(); gameLogged=false; resultPopupShownFor=null;
   document.getElementById('gameModeLabel').textContent = 'Local 2-player';
   document.getElementById('whiteName').textContent='White';
   document.getElementById('blackName').textContent='Black';
@@ -2026,17 +2350,24 @@ function startLocalGame(){
    9) MODE: VS BOT
    ============================================================ */
 function personalityDisplayName(p){
-  return {aggressive:'Aggressor ⚔', defensive:'Guardian 🛡', chaotic:'Trickster 🎲'}[p] || 'Computer';
+  return {aggressive:'Aggressive style', defensive:'Defensive style', chaotic:'Chaotic style'}[p] || 'Chess opponent';
+}
+function makeBotPlayerName(){
+  const indian=['Aarav','Kabir','Vihaan','Arjun','Meera','Ananya','Rohan','Ishaan','Aditi','Krishna','Nisha','Reyansh','Tara','Dev','Myra','Neel','Ira','Vivaan','Saanvi','Kunal'];
+  const english=['Oliver','Liam','Noah','Ethan','Leo','Mia','Lucas','Ella','James','Ava','Henry','Ruby','Jack','Grace','Oscar','Chloe','Mason','Emily','Ryan','Sophie'];
+  const pool=Math.random()<0.5?indian:english;
+  return pool[Math.floor(Math.random()*pool.length)]+' '+String(Math.floor(10000+Math.random()*90000));
 }
 
-function startBotGame(level){
-  gameMode='bot'; botLevel=level; currentGameId=null; detachGameListener(); gameLogged=false; resultPopupShownFor=null;
-  const modeLabel = botPersonality
-    ? personalityDisplayName(botPersonality)
-    : ('vs Computer (' + level[0].toUpperCase()+level.slice(1) + ')');
-  document.getElementById('gameModeLabel').textContent = modeLabel;
+function startBotGame(level, displayName){
+  gameMode='bot'; botLevel=level; currentGameId=null; window.__activeMatchNumber=newMatchNumber(); detachGameListener(); gameLogged=false; resultPopupShownFor=null;
+  if(typeof displayName==='string' && displayName.trim()) botDisplayName = displayName.trim();
+  else if(!botDisplayName || /^Bot (Easy|Medium|Hard)$/i.test(botDisplayName) || /^(Aggressor|Guardian|Trickster)/i.test(botDisplayName)) botDisplayName = makeBotPlayerName();
+  activeBotDisplayName = botDisplayName;
+  const modeLabel = activeBotDisplayName;
+  document.getElementById('gameModeLabel').textContent = 'vs ' + modeLabel;
   document.getElementById('whiteName').textContent = currentUser.username + ' (you)';
-  document.getElementById('blackName').textContent = botPersonality ? personalityDisplayName(botPersonality) : 'Computer';
+  document.getElementById('blackName').textContent = activeBotDisplayName;
   game.reset(); selected=null; legalTargets=[]; lastMove=null; flipped=false;
   initLocalClocks(selectedGameMinutes);
   startClockTimer();
@@ -2181,7 +2512,7 @@ function detachGameListener(){
 
 function openOnlineGame(gameId){
   window.__onlineGameFinished=false;
-  gameMode='online'; currentGameId=gameId; window.currentOnlineGameId=currentGameId; window.currentUser=currentUser; window.db=db; detachGameListener(); gameLogged=false; resultPopupShownFor=null;
+  gameMode='online'; currentGameId=gameId; window.currentOnlineGameId=currentGameId; window.__activeMatchNumber = null; window.currentUser=currentUser; window.db=db; detachGameListener(); gameLogged=false; resultPopupShownFor=null;
   flipped=false; selected=null; legalTargets=[]; lastMove=null;
   buildBoard();
   currentGameUnsub = db.collection('games').doc(gameId).onSnapshot(doc=>{
@@ -2421,7 +2752,7 @@ window.__startOnlineClockLoop(checkOnlineTimeout);
    11) CONTROLS
    ============================================================ */
 document.getElementById('btnNew').onclick = () => {
-  if(gameMode==='bot') startBotGame(botLevel);
+  if(gameMode==='bot') startBotGame(botLevel, activeBotDisplayName || botDisplayName);
   else if(gameMode==='local') startLocalGame();
   else statusLine.textContent = 'Resign or finish this game to start a new one.';
 };
@@ -2487,42 +2818,94 @@ function subscribeLivePlayers(){
       });
 
       players.sort((a,b)=>a.username.localeCompare(b.username));
+      window.__liveRealPlayers=players;
+      initLivePlayerControls();
       renderLivePlayers(players);
     }, ()=>{
+      window.__liveRealPlayers=[];
+      initLivePlayerControls();
       renderLivePlayers([], 'Live player list unavailable.');
     });
 }
 
+function getRandomBotStart(){
+  return Math.floor(Math.random()*9991); // 0..9990, always leaves 10 visible
+}
+
+let liveBotStartIndex = getRandomBotStart();
+
 function renderLivePlayers(players, emptyMessage){
   const el = document.getElementById('livePlayersList');
   const countEl = document.getElementById('onlineCount');
+  const searchEl = document.getElementById('livePlayerSearch');
   if(!el || !countEl) return;
 
-  countEl.textContent = `${players.length} online`;
+  const indianNames=[
+    'Aarav','Vivaan','Aditya','Arjun','Kabir','Vihaan','Rohan','Rahul','Kunal','Yash',
+    'Aryan','Dev','Krishna','Ishaan','Ayaan','Dhruv','Ananya','Meera','Ira','Kiara',
+    'Neel','Reyansh','Atharv','Rudra','Saanvi','Myra','Aditi','Nisha','Tanya','Pihu'
+  ];
+  const englishNames=['Oliver','Liam','Noah','Ethan','James','Lucas','Henry','Leo','Jack','Mason','Oscar','Ryan','Alex','Max','Daniel','Sam','Charlie','Evan','Adam','Ben'];
+  const totalBots=10000;
+  const realAll=[...players.filter(p=>!p.isBot)];
+  const query=(searchEl?.value||'').trim().toLowerCase();
+  const real=realAll
+    .filter(p=>!query || String(p.username||'').toLowerCase().includes(query))
+    .sort((a,b)=>String(a.username||'').localeCompare(String(b.username||'')));
 
-  if(!players.length){
-    el.innerHTML = `<div class="empty">${emptyMessage || 'No other players are online right now.'}</div>`;
+  const botNames=[];
+  for(let offset=0;offset<10;offset++){
+    const i=((liveBotStartIndex+offset)%totalBots)+1;
+    const pool=(i%2===0)?englishNames:indianNames;
+    const base=pool[(i-1)%pool.length];
+    botNames.push({uid:`bot-${String(i).padStart(5,'0')}`,username:`${base} ${String(i).padStart(5,'0')}`,isBot:true,level:['easy','medium','hard'][i%3]});
+  }
+
+  countEl.textContent='10,000 online';
+  // Real users are always first. Bots are the available 10K pool preview.
+  const visible=[...real,...botNames];
+  if(!visible.length){
+    el.innerHTML='<div class="empty">'+escapeHtml(query?'No real player found for “'+query+'”.':'Looking for players…')+'</div>';
     return;
   }
 
-  el.innerHTML = '';
-  players.forEach(p=>{
-    const row = document.createElement('div');
-    row.className = 'live-player';
-    const initial = (p.username || '?').charAt(0).toUpperCase();
-    row.innerHTML = `
-      <div class="live-player-info">
-        <div class="live-avatar">${escapeHtml(initial)}</div>
-        <div>
-          <div class="live-player-name">${escapeHtml(p.username)}</div>
-          <div class="live-player-state">● Online</div>
-        </div>
-      </div>
-      <button class="small primary live-play-btn">Play</button>
-    `;
-    row.querySelector('button').addEventListener('click', ()=>playLivePlayer(p.uid,p.username));
-    el.appendChild(row);
+  el.innerHTML = visible.map(p=>{
+    const initial=(p.username||'?').charAt(0).toUpperCase();
+    return `<div class="live-player"><div class="live-player-info"><div class="live-avatar">${escapeHtml(initial)}</div><div><div class="live-player-name">${escapeHtml(p.username)}</div><div class="live-player-state">● ${p.isBot?'Ready to play':'Online now'}</div></div></div><button class="small primary live-play-btn" data-uid="${escapeHtml(p.uid)}">Play</button></div>`;
+  }).join('') + `<div class="hint live-player-loading" style="grid-column:1/-1">Showing 10 opponents from <b>10,000</b> available names. Refresh for a new set.</div>`;
+
+  el.querySelectorAll('button[data-uid]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id=btn.dataset.uid;
+      const p=visible.find(x=>x.uid===id);
+      if(p?.isBot){
+        botPersonality=null;
+        botDisplayName=p.username;
+        activeBotDisplayName=p.username;
+        startBotGame(p.level,p.username);
+      } else if(p){
+        playLivePlayer(p.uid,p.username);
+      }
+    });
   });
+}
+
+function refreshLivePlayers(){
+  liveBotStartIndex=getRandomBotStart();
+  renderLivePlayers(window.__liveRealPlayers||[]);
+}
+
+function initLivePlayerControls(){
+  const search=document.getElementById('livePlayerSearch');
+  const refresh=document.getElementById('btnRefreshLivePlayers');
+  if(search && !search.dataset.bound){
+    search.dataset.bound='1';
+    search.addEventListener('input',()=>renderLivePlayers(window.__liveRealPlayers||[]));
+  }
+  if(refresh && !refresh.dataset.bound){
+    refresh.dataset.bound='1';
+    refresh.addEventListener('click',refreshLivePlayers);
+  }
 }
 
 function setQuickMatchUI(searching, message){
@@ -2650,6 +3033,7 @@ async function tryFindRandomOpponent(){
       status:'active',
       invitedBy:null,
       matchType:'random',
+      matchNumber:newMatchNumber(),
       moves:[],
       resultReason:null,
       winner:null,
@@ -2693,6 +3077,7 @@ async function playLivePlayer(uid, username){
       blackUid:uid, blackUsername:username,
       status:'invited',
       invitedBy:currentUser.uid,
+      matchNumber:newMatchNumber(),
       matchType:'live-player',
       moves:[], resultReason:null, winner:null,
       timeMinutes:selectedGameMinutes,
@@ -2773,16 +3158,16 @@ window.addEventListener('pagehide',function(){
     try { localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0,100))); } catch(e){}
   }
   function saveFinishedHistory(result, winnerName, reason, whiteName, blackName, mode){
-    const key = [mode, whiteName, blackName, result, reason].join("|");
+    const me=(currentUser&&currentUser.username)||"";
+    const normalized = winnerName ? (winnerName===me ? "WIN" : "LOSS") : (/draw/i.test(String(result||"")+" "+String(reason||"")) ? "DRAW" : "");
+    if(!normalized) return;
+    const matchNumber = window.__activeMatchNumber || (currentGameId ? currentGameId.slice(0,8).toUpperCase() : newMatchNumber());
+    const key=[matchNumber,normalized].join("|");
     if(historySavedKeys.has(key)) return;
     historySavedKeys.add(key);
-    const items = readLocalHistory();
+    const items=readLocalHistory();
     if(items.some(x=>x.key===key)) return;
-    items.unshift({
-      key, result, winnerName:winnerName||"",
-      reason:reason||"Game finished", whiteName, blackName,
-      mode, at:new Date().toISOString()
-    });
+    items.unshift({key,matchNumber,result:normalized,winnerName:winnerName||"",reason:reason||"Game finished",whiteName,blackName,mode,at:new Date().toISOString()});
     writeLocalHistory(items);
     renderHistoryDashboard();
   }
@@ -2798,15 +3183,31 @@ window.addEventListener('pagehide',function(){
     const el=document.getElementById("gameHistoryDashboard");
     if(!el) return;
     const local=readLocalHistory();
-    const rows=extra ? extra.concat(local) : local;
-    if(!rows.length){ el.innerHTML='<div class="empty">No finished games yet.</div>'; return; }
-    el.innerHTML=rows.slice(0,30).map(x=>{
+    const rows=(extra ? extra.concat(local) : local).filter(x=>x && x.result);
+    const mine=rows.filter(x=>{
+      const me=(currentUser&&currentUser.username)||"";
+      return x.whiteName===me || x.blackName===me || x.winnerName===me;
+    });
+    const stats=mine.reduce((a,x)=>{
+      const r=String(x.result||"").toUpperCase();
+      if(r==="WIN" || (r==="1-0" && x.winnerName===currentUser?.username) || (r==="0-1" && x.winnerName===currentUser?.username)) a.wins++;
+      else if(r==="DRAW" || r==="1/2-1/2") a.draws++;
+      else if(r==="LOSS") a.losses++;
+      return a;
+    },{wins:0,losses:0,draws:0});
+    const games=stats.wins+stats.losses+stats.draws;
+    const pct=games ? (stats.wins/games*100).toFixed(1) : "0.0";
+    const recent=Array.from(new Map(mine.map(x=>[x.matchNumber||x.key,x])).values()).sort((a,b)=>String(b.at||"").localeCompare(String(a.at||""))).slice(0,15);
+    if(!games){ el.innerHTML='<div class="empty">No finished games yet.</div>'; return; }
+    el.innerHTML=`<div class="profile-stat-grid" style="margin-bottom:12px">
+      <div class="profile-stat"><b>${stats.wins}</b><span>Wins</span></div>
+      <div class="profile-stat"><b>${stats.losses}</b><span>Losses</span></div>
+      <div class="profile-stat"><b>${stats.draws}</b><span>Draws</span></div>
+      <div class="profile-stat"><b>${games}</b><span>Total</span></div>
+      <div class="profile-stat"><b>${pct}%</b><span>Win %</span></div>
+    </div>` + recent.map(x=>{
       const when=x.at ? new Date(x.at).toLocaleString() : "";
-      return '<div class="history-row"><div><div class="name">'+escapeHtml(x.whiteName||"White")+
-        ' <span class="hint">vs</span> '+escapeHtml(x.blackName||"Black")+
-        '</div><div class="history-date">'+escapeHtml(x.mode||"Game")+' • '+escapeHtml(when)+'</div></div>'+
-        '<div class="history-result">'+escapeHtml(x.result||"Finished")+'</div>'+
-        '<div class="history-date">'+escapeHtml(x.reason||"")+'</div></div>';
+      return '<div class="history-row"><div><div class="name">Match #'+escapeHtml(x.matchNumber||"—")+' • '+escapeHtml(x.whiteName||"White")+' <span class="hint">vs</span> '+escapeHtml(x.blackName||"Black")+'</div><div class="history-date">'+escapeHtml(x.mode||"Game")+' • '+escapeHtml(when)+'</div></div><div class="history-result">'+escapeHtml(String(x.result||"Finished"))+'</div><div class="history-date">'+escapeHtml(x.reason||"")+'</div></div>';
     }).join("");
   }
   window.renderHistoryDashboard=renderHistoryDashboard;
@@ -3003,11 +3404,11 @@ window.addEventListener('pagehide',function(){
     return originalCanInteract();
   };
 
-  /* ---------- Theme: persist + apply Black & White and 2 additional themes ---------- */
+  /* ---------- Theme persistence ---------- */
   const originalApplyTheme = applyTheme;
   applyTheme = function(theme){
     originalApplyTheme(theme);
-    if(theme==="bw" || theme==="ocean" || theme==="forest"){
+    if(theme==="ocean" || theme==="forest"){
       document.body.setAttribute("data-theme",theme);
     }
   };
@@ -3028,7 +3429,7 @@ window.addEventListener('pagehide',function(){
       if(players[i+1]) rounds.push(players[i]+" vs "+players[i+1]);
       else rounds.push(players[i]+" gets a bye");
     }
-    const title=computerMode ? "Computer Tournament created" : "Player Tournament created";
+    const title=computerMode ? "Quick Bot Tournament created" : "Player Tournament created";
     if(el) el.innerHTML="<b>"+escapeHtml(title)+"</b><br>"+escapeHtml(rounds.join(" • "))+
       "<br><span class='hint'>Tournament bracket is ready. Games are played from the normal game screen.</span>";
     localStorage.setItem("deskchess_last_tournament",JSON.stringify({title,players,createdAt:new Date().toISOString()}));
@@ -3041,7 +3442,7 @@ window.addEventListener('pagehide',function(){
     const n=Number(prompt("How many computer players? (2-8)","4"));
     if(!Number.isFinite(n) || n<2) return;
     const players=["You"];
-    for(let i=1;i<Math.min(8,n+1);i++) players.push("Computer "+i);
+    for(let i=1;i<Math.min(8,n+1);i++) players.push(["Aarav","Kabir","Oliver","Rohan","Liam","Arjun","Noah"][i-1]||("Player "+i));
     runTournament(players,true);
   });
 
@@ -3195,13 +3596,16 @@ window.addEventListener('pagehide',function(){
 
   function renderAchievements(d){
     const el=q("achievementList"); if(!el)return;
+    const games=Number(d.games||0), wins=Number(d.wins||0), losses=Number(d.losses||0), draws=Number(d.draws||0);
     const a=[
-      ["♟️","First Game",d.games>=1,"Complete your first game"],
-      ["🏆","First Win",d.wins>=1,"Win your first game"],
-      ["🔥","Hot Streak",d.bestStreak>=5,"Reach a 5-win streak"],
-      ["⚔️","10 Wins",d.wins>=10,"Win 10 games"],
-      ["💯","50 Games",d.games>=50,"Complete 50 games"],
-      ["👑","1500 Rating",d.rating>=1500,"Reach 1500 rating"]
+      ["♟️","First Game",games>=1,"Complete your first game"],
+      ["🏆","First Win",wins>=1,"Get a recorded WIN result"],
+      ["🔥","Hot Streak",Number(d.bestStreak||0)>=5,"Reach a 5-win streak"],
+      ["⚔️","10 Wins",wins>=10,"Get 10 recorded wins"],
+      ["💯","50 Games",games>=50,"Complete 50 recorded games"],
+      ["🤝","Fair Player",draws>=1,"Finish a game as a draw"],
+      ["👑","1500 Rating",Number(d.rating||1200)>=1500,"Reach 1500 rating"],
+      ["📊","Positive Record",games>=5 && wins>losses,"Have more wins than losses after 5 games"]
     ];
     el.innerHTML=a.map(x=>`<div class="achievement ${x[2]?'unlocked':''}"><div class="aicon">${x[0]}</div><b>${x[1]}</b><small>${x[3]}</small></div>`).join("");
   }
@@ -3212,7 +3616,7 @@ window.addEventListener('pagehide',function(){
     const s=await db.collection("users").doc(uid()).get().catch(()=>null);
     const d=s&&s.exists?s.data():{games:0,wins:0,losses:0,draws:0,rating:1200,winPct:0,streak:0,bestStreak:0};
     renderMyProfile(d);renderPerformance(d);renderAchievements(d);
-    renderLeaderboard();renderGameTools();
+    renderLeaderboard();
   }
 
   /* ---------- Game result -> cloud stats ---------- */
@@ -3225,7 +3629,7 @@ window.addEventListener('pagehide',function(){
     await updateMyStats(result,opponentRating);
     playSound(result==="win"?"win":result==="draw"?"draw":"lose");
     renderLeaderboard();
-    renderGameTools();
+    
   }
 
   /* ---------- Sound effects ---------- */
@@ -3272,17 +3676,7 @@ window.addEventListener('pagehide',function(){
     q("replayOverlay").classList.add("show");drawReplay();
   }
 
-  function renderGameTools(){
-    const el=q("gameToolsList"); if(!el)return;
-    const h=getHistory();
-    if(!h.length){el.innerHTML='<div class="empty">Finish a game to unlock replay and PGN tools.</div>';return;}
-    el.innerHTML=h.slice(0,10).map((g,i)=>`<div class="tool-row">
-      <div><b>${esc(g.white||"White")} vs ${esc(g.black||"Black")}</b><div class="history-date">${esc(g.date||"")} • ${esc(g.reason||"")}</div></div>
-      <div class="tool-actions"><button class="small" data-replay="${i}">▶ Replay</button><button class="small" data-pgn="${i}">📥 PGN</button></div>
-    </div>`).join("");
-    el.querySelectorAll("[data-replay]").forEach(b=>b.onclick=()=>{const g=h[+b.dataset.replay];openReplay(g.moves||[],`${g.white||"White"} vs ${g.black||"Black"}`)});
-    el.querySelectorAll("[data-pgn]").forEach(b=>b.onclick=()=>{const g=h[+b.dataset.pgn];downloadText("desk-chess-"+Date.now()+".pgn",pgnFromMoves(g.moves||[],g.white,g.black,g.result||"*"))});
-  }
+  function renderGameTools(){ /* removed from dashboard by request */ }
 
   /* ---------- Online draw / takeback / rematch ---------- */
   async function offerDraw(){
@@ -3292,8 +3686,22 @@ window.addEventListener('pagehide',function(){
   }
   async function takeback(){
     if(gameMode!=="online"||!currentGameId||window.__onlineGameFinished)return;
-    await db.collection("games").doc(currentGameId).update({takebackRequestBy:uid()}).catch(()=>{});
-    statusLine.textContent="Takeback request sent.";
+    const ref=db.collection("games").doc(currentGameId);
+    try{
+      await db.runTransaction(async tx=>{
+        const snap=await tx.get(ref);
+        if(!snap.exists) throw new Error("Game not found.");
+        const g=snap.data()||{};
+        const moves=Array.isArray(g.moves)?g.moves:[];
+        const used=Number(g.takebackUsed||g.takebackCount||0);
+        if(g.status!=="active") throw new Error("This game has finished.");
+        if(used>=2) throw new Error("Takeback limit reached (2 per match).");
+        if(!moves.length) throw new Error("There is no move to take back yet.");
+        if(g.takebackRequestBy) throw new Error("A takeback request is already pending.");
+        tx.update(ref,{takebackRequestBy:uid(),takebackRequestName:uname(),takebackResponse:"pending",takebackRequestedAt:firebase.firestore.FieldValue.serverTimestamp()});
+      });
+      statusLine.textContent="Takeback request sent. Waiting for your opponent.";
+    }catch(e){ statusLine.textContent=e.message||"Could not send takeback request."; }
   }
   async function rematch(){
     if(gameMode!=="online"||!currentGameId)return;
@@ -3302,7 +3710,7 @@ window.addEventListener('pagehide',function(){
     if(!oppUid)return;
     const ref=await db.collection("games").add({
       whiteUid:uid(),whiteUsername:uname(),blackUid:oppUid,blackUsername:oppName,status:"invited",
-      invitedBy:uid(),moves:[],resultReason:null,winner:null,timeMinutes:g.timeMinutes||10,
+      invitedBy:uid(),matchNumber:newMatchNumber(),moves:[],resultReason:null,winner:null,timeMinutes:g.timeMinutes||10,
       whiteTimeMs:gameTimeMs(),blackTimeMs:gameTimeMs(),turnStartedAt:null,createdAt:firebase.firestore.FieldValue.serverTimestamp(),
       rematchOf:currentGameId
     });
@@ -3322,14 +3730,23 @@ window.addEventListener('pagehide',function(){
   /* ---------- Save local game history + cloud result ---------- */
   function saveFinishedGame(reason,winner){
     const moves=currentMoves();
-    const key=[currentGameId||gameMode,reason,winner,moves.length].join("|");
+    const white=q("whiteName")?.textContent||"White", black=q("blackName")?.textContent||"Black";
+    const me=uname();
+    let explicitResult="";
+    if(winner){
+      if(gameMode==="local") explicitResult=(winner===white?"WIN":"LOSS");
+      else if(gameMode==="bot") explicitResult=(winner===white?"WIN":"LOSS");
+      else explicitResult=(winner===me?"WIN":"LOSS");
+    } else if(/draw/i.test(String(reason||""))) explicitResult="DRAW";
+    if(!explicitResult) return;
+    const matchNumber = window.__activeMatchNumber || (currentGameId ? currentGameId.slice(0,8).toUpperCase() : newMatchNumber());
+    const key=[matchNumber,explicitResult].join("|");
     const h=getHistory();
     if(!h.some(x=>x.key===key)){
-      h.unshift({key,date:nowStr(),mode:gameMode,white:q("whiteName")?.textContent||"White",black:q("blackName")?.textContent||"Black",
-        winner:winner||"",reason:reason||"Game finished",result:winner===q("whiteName")?.textContent?"1-0":winner===q("blackName")?.textContent?"0-1":"1/2-1/2",moves});
+      h.unshift({key,matchNumber,date:nowStr(),mode:gameMode,white,black,
+        winner:winner||"",reason:reason||"Game finished",result:explicitResult,moves});
       saveHistory(h);
     }
-    renderGameTools();
   }
 
   /* Wrap result popup so local games also update profile stats. */
@@ -3338,14 +3755,65 @@ window.addEventListener('pagehide',function(){
       originalShowResult(winnerName,reason,message);
       const white=q("whiteName")?.textContent||"White", black=q("blackName")?.textContent||"Black";
       saveFinishedGame(reason,winnerName);
-      if(gameMode==="local"){
-        const r=winnerName===white?"win":winnerName===black?"loss":"draw";
-        updateMyStats(r,1200);
-      } else if(gameMode==="bot"){
-        const r=winnerName===white?"win":"loss";
-        updateMyStats(r,1200);
+      if(gameMode!=="online"){
+        const finalResult = winnerName ? (winnerName===white ? "win" : "loss") : (/draw/i.test(String(reason||"")) ? "draw" : "");
+        if(["win","loss","draw"].includes(finalResult)){
+          const statsKey=(window.__activeMatchNumber||currentGameId||"match")+"|FINAL";
+          if(!statsRecordedKeys.has(statsKey)){ statsRecordedKeys.add(statsKey); updateMyStats(finalResult,1200); }
+        }
       }
     };
+  }
+
+  /* ---------- Right-side takeback request popup + synchronized undo ---------- */
+  function hideTakebackToast(){
+    const toast=q("takebackRequestToast");
+    if(toast) toast.hidden=true;
+    window.__activeTakebackRequestKey=null;
+  }
+  function showTakebackToast(gameId,requesterUid,requesterName,requestedAt){
+    const toast=q("takebackRequestToast");
+    if(!toast) return;
+    const stamp=requestedAt && typeof requestedAt.toMillis==="function" ? requestedAt.toMillis() : String(requestedAt||"");
+    const key=[gameId,requesterUid,stamp].join("|");
+    if(window.__activeTakebackRequestKey===key && !toast.hidden) return;
+    window.__activeTakebackRequestKey=key;
+    const text=q("takebackRequestText");
+    if(text) text.textContent=(requesterName||"Your opponent")+" requested to take back the last move. Accepting undoes one move. Maximum: 2 accepted takebacks per match.";
+    toast.dataset.gameId=gameId;
+    toast.dataset.requesterUid=requesterUid;
+    toast.dataset.requestKey=key;
+    toast.hidden=false;
+    const accept=q("takebackAccept"), decline=q("takebackDecline"), close=q("takebackClose");
+    if(accept) accept.onclick=()=>resolveTakebackRequest(gameId,requesterUid,true);
+    if(decline) decline.onclick=()=>resolveTakebackRequest(gameId,requesterUid,false);
+    if(close) close.onclick=()=>resolveTakebackRequest(gameId,requesterUid,false);
+  }
+  async function resolveTakebackRequest(gameId,requesterUid,accept){
+    const ref=db.collection("games").doc(gameId);
+    try{
+      await db.runTransaction(async tx=>{
+        const snap=await tx.get(ref);
+        if(!snap.exists) throw new Error("Match not found.");
+        const g=snap.data()||{};
+        if(g.status!=="active" || g.takebackRequestBy!==requesterUid) throw new Error("This takeback request is no longer active.");
+        const update={takebackRequestBy:null,takebackRequestName:null,takebackResponse:accept?"accepted":"declined",takebackRespondedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+        if(accept){
+          const moves=Array.isArray(g.moves)?g.moves.slice():[];
+          const used=Number(g.takebackUsed||g.takebackCount||0);
+          if(used>=2) throw new Error("Maximum 2 takebacks per match have been used.");
+          if(!moves.length) throw new Error("There is no move to undo.");
+          moves.pop();
+          update.moves=moves;
+          update.takebackUsed=used+1;
+          update.takebackCount=used+1;
+          update.turnStartedAt=firebase.firestore.FieldValue.serverTimestamp();
+        }
+        tx.update(ref,update);
+      });
+      statusLine.textContent=accept?"Takeback accepted — the last move has been undone for both players.":"Takeback declined.";
+    }catch(e){ statusLine.textContent=e.message||"Could not process the takeback request."; }
+    hideTakebackToast();
   }
 
   /* ---------- Terminal-state listener for online games ---------- */
@@ -3355,6 +3823,8 @@ window.addEventListener('pagehide',function(){
     db.collection("games").doc(gameId).onSnapshot(s=>{
       if(!s.exists)return;
       const g=s.data()||{};
+      window.__activeMatchNumber=g.matchNumber || window.__activeMatchNumber || gameId.slice(0,8).toUpperCase();
+      const mn=document.getElementById("matchNumberLabel"); if(mn) mn.textContent="Match #"+window.__activeMatchNumber;
       if(g.drawOfferBy && g.drawOfferBy!==uid() && g.status==="active"){
         if(confirm("Opponent offered a draw. Accept?")){
           db.collection("games").doc(gameId).update({status:"draw",winner:null,resultReason:"Draw by agreement"});
@@ -3363,15 +3833,17 @@ window.addEventListener('pagehide',function(){
         }
       }
       if(g.takebackRequestBy && g.takebackRequestBy!==uid() && g.status==="active"){
-        if(confirm("Opponent requested a takeback. Accept?")){
-          db.collection("games").doc(gameId).update({takebackAccepted:true,takebackRequestBy:null});
-        } else db.collection("games").doc(gameId).update({takebackRequestBy:null});
+        showTakebackToast(gameId,g.takebackRequestBy,g.takebackRequestName||"Your opponent",g.takebackRequestedAt);
+      } else if(!g.takebackRequestBy){
+        hideTakebackToast();
       }
       if(["timeout","checkmate","resigned","draw","abandoned"].includes(g.status)){
         const winnerName=g.winner===g.whiteUid?g.whiteUsername:g.winner===g.blackUid?g.blackUsername:"";
-        saveFinishedGame(g.resultReason||g.status,winnerName);
-        const result=resultForMe(g.winner,g.status);
-        recordCloudResult(g.winner,g.status,gameId+"|"+g.status+"|"+(g.winner||"draw"),1200);
+        const finalResult=g.status==="draw" ? "draw" : (winnerName ? resultForMe(g.winner,g.status) : "");
+        if(finalResult){
+          saveFinishedGame(g.resultReason||g.status,winnerName);
+          recordCloudResult(g.winner,g.status,gameId+"|FINAL|"+(g.winner||"draw"),1200);
+        }
         q("btnDrawOffer")?.setAttribute("disabled","disabled");
         q("btnTakeback")?.setAttribute("disabled","disabled");
       }
@@ -3385,6 +3857,27 @@ window.addEventListener('pagehide',function(){
       return r;
     };
   }
+
+  /* ---------- Board brightness control ---------- */
+  function applyBoardBrightness(value){
+    const n=Math.max(70,Math.min(130,Number(value)||100));
+    document.documentElement.style.setProperty('--board-brightness',String(n/100));
+    const board=document.getElementById('board');
+    if(board) board.style.filter=`brightness(${n/100})`;
+    const out=document.getElementById('boardBrightnessValue');
+    if(out) out.textContent=n+'%';
+  }
+  function initBoardBrightness(){
+    const slider=document.getElementById('boardBrightness');
+    if(!slider || slider.dataset.bound) return;
+    slider.dataset.bound='1';
+    slider.addEventListener('input',()=>applyBoardBrightness(slider.value));
+    applyBoardBrightness(slider.value);
+  }
+  document.addEventListener('DOMContentLoaded',initBoardBrightness);
+  setTimeout(initBoardBrightness,300);
+
+  initLivePlayerControls();
 
   /* ---------- Init ---------- */
   const oldShowLobby=window.showLobby;
@@ -3410,6 +3903,17 @@ window.addEventListener('pagehide',function(){
 
 })();
 </script>
+
+
+<div id="takebackRequestToast" class="takeback-toast" role="dialog" aria-live="polite" aria-label="Takeback request" hidden>
+  <h3>↩ Takeback request</h3>
+  <p id="takebackRequestText">Your opponent requested to take back the last move.</p>
+  <div class="takeback-actions">
+    <button type="button" class="takeback-accept" id="takebackAccept">Accept</button>
+    <button type="button" class="takeback-decline" id="takebackDecline">Decline</button>
+    <button type="button" class="takeback-decline" id="takebackClose">×</button>
+  </div>
+</div>
 
 </body>
 </html>
