@@ -1633,33 +1633,63 @@ document.getElementById('btnSignup').onclick = async () => {
   } catch(e){ errEl.textContent = e.message; }
 };
 
-document.getElementById('btnLogin').onclick = async () => {
-  const errEl = document.getElementById('loginErr'); errEl.textContent='';
+async function performLogin(){
+  const errEl = document.getElementById('loginErr');
+  const btn = document.getElementById('btnLogin');
+  if(errEl) errEl.textContent='';
   const uname = cleanUsername(document.getElementById('loginUsername').value);
   const pass = document.getElementById('loginPassword').value;
-  if(!uname || !pass){ errEl.textContent = 'Enter your username and password.'; return; }
+  if(!uname || !pass){ if(errEl) errEl.textContent = 'Enter your username and password.'; return; }
+  if(!window.firebase || !auth){ if(errEl) errEl.textContent='Firebase is still loading. Please try again.'; return; }
+  const oldText=btn ? btn.textContent : '';
+  if(btn){ btn.disabled=true; btn.textContent='Logging in…'; }
   try{
     await auth.signInWithEmailAndPassword(uname + EMAIL_SUFFIX, pass);
     logToSheet('Logins', ['Username','Logged in at'], [uname, nowStr()]);
-  } catch(e){ errEl.textContent = 'Incorrect username or password.'; }
-};
+  }catch(e){
+    const code=e && e.code || '';
+    const messages={
+      'auth/user-not-found':'Username not found.',
+      'auth/wrong-password':'Incorrect password.',
+      'auth/invalid-login-credentials':'Incorrect username or password.',
+      'auth/invalid-credential':'Incorrect username or password.',
+      'auth/user-disabled':'This account has been disabled.',
+      'auth/too-many-requests':'Too many attempts. Please wait and try again.',
+      'auth/network-request-failed':'Network error. Check your internet connection.',
+      'auth/operation-not-allowed':'Firebase Email/Password sign-in is disabled in Firebase Authentication.'
+    };
+    if(errEl) errEl.textContent=messages[code] || (e && e.message) || 'Login failed. Please try again.';
+  }finally{
+    if(btn){ btn.disabled=false; btn.textContent=oldText || 'Login'; }
+  }
+}
+document.getElementById('btnLogin').onclick = performLogin;
+document.getElementById('loginPassword').addEventListener('keydown',e=>{ if(e.key==='Enter') performLogin(); });
 
 document.getElementById('btnLogout').onclick = () => auth.signOut();
 
 auth.onAuthStateChanged(async (user) => {
   if(user){
-    const doc = await db.collection('users').doc(user.uid).get();
-    const data = doc.data() || {};
-    currentUser = { uid: user.uid, username: data.username || '' };
+    let username = '';
+    try{
+      const doc = await db.collection('users').doc(user.uid).get();
+      const data = doc.data() || {};
+      username = data.username || '';
+    }catch(e){
+      console.warn('User profile read failed after Firebase Auth:', e);
+    }
+    if(!username && user.email && user.email.endsWith(EMAIL_SUFFIX)) username=user.email.slice(0,-EMAIL_SUFFIX.length);
+    username=cleanUsername(username) || 'Player';
+    currentUser = { uid: user.uid, username };
     window.currentUser = currentUser;
     window.db = db;
     document.getElementById('myUsernameLabel').textContent = currentUser.username;
     authScreen.classList.add('hidden');
     showLobby();
-    listenFriendsAndRequests();
-    listenGamesForMe();
-    startPresence();
-    subscribeLivePlayers();
+    try{ listenFriendsAndRequests(); }catch(e){ console.warn('Friends listener failed:',e); }
+    try{ listenGamesForMe(); }catch(e){ console.warn('Games listener failed:',e); }
+    try{ startPresence(); }catch(e){}
+    try{ subscribeLivePlayers(); }catch(e){}
   } else {
     stopPresence();
     if(livePlayersUnsub){ livePlayersUnsub(); livePlayersUnsub=null; }
@@ -3159,7 +3189,9 @@ window.addEventListener('pagehide',function(){
   }
   function saveFinishedHistory(result, winnerName, reason, whiteName, blackName, mode){
     const me=(currentUser&&currentUser.username)||"";
-    const normalized = winnerName ? (winnerName===me ? "WIN" : "LOSS") : (/draw/i.test(String(result||"")+" "+String(reason||"")) ? "DRAW" : "");
+    const cleanName=v=>String(v||"").replace(/\s*\(you\)\s*$/i,"").trim();
+    const winnerClean=cleanName(winnerName), meClean=cleanName(me);
+    const normalized = winnerClean ? (winnerClean===meClean ? "WIN" : "LOSS") : (/draw/i.test(String(result||"")+" "+String(reason||"")) ? "DRAW" : "");
     if(!normalized) return;
     const matchNumber = window.__activeMatchNumber || (currentGameId ? currentGameId.slice(0,8).toUpperCase() : newMatchNumber());
     const key=[matchNumber,normalized].join("|");
@@ -3730,13 +3762,14 @@ window.addEventListener('pagehide',function(){
   /* ---------- Save local game history + cloud result ---------- */
   function saveFinishedGame(reason,winner){
     const moves=currentMoves();
-    const white=q("whiteName")?.textContent||"White", black=q("blackName")?.textContent||"Black";
-    const me=uname();
+    const whiteRaw=q("whiteName")?.textContent||"White", blackRaw=q("blackName")?.textContent||"Black";
+    const cleanName=v=>String(v||"").replace(/\s*\(you\)\s*$/i,"").trim();
+    const white=cleanName(whiteRaw), black=cleanName(blackRaw), me=cleanName(uname());
+    const winnerClean=cleanName(winner);
     let explicitResult="";
-    if(winner){
-      if(gameMode==="local") explicitResult=(winner===white?"WIN":"LOSS");
-      else if(gameMode==="bot") explicitResult=(winner===white?"WIN":"LOSS");
-      else explicitResult=(winner===me?"WIN":"LOSS");
+    if(winnerClean){
+      if(gameMode==="local") explicitResult=(winnerClean===white?"WIN":"LOSS");
+      else explicitResult=(winnerClean===me?"WIN":"LOSS");
     } else if(/draw/i.test(String(reason||""))) explicitResult="DRAW";
     if(!explicitResult) return;
     const matchNumber = window.__activeMatchNumber || (currentGameId ? currentGameId.slice(0,8).toUpperCase() : newMatchNumber());
@@ -3753,10 +3786,11 @@ window.addEventListener('pagehide',function(){
   if(typeof originalShowResult==="function"){
     window.showResultCelebration=function(winnerName,reason,message){
       originalShowResult(winnerName,reason,message);
-      const white=q("whiteName")?.textContent||"White", black=q("blackName")?.textContent||"Black";
+      const cleanName=v=>String(v||"").replace(/\s*\(you\)\s*$/i,"").trim();
+      const white=cleanName(q("whiteName")?.textContent||"White"), black=cleanName(q("blackName")?.textContent||"Black");
       saveFinishedGame(reason,winnerName);
       if(gameMode!=="online"){
-        const finalResult = winnerName ? (winnerName===white ? "win" : "loss") : (/draw/i.test(String(reason||"")) ? "draw" : "");
+        const finalResult = winnerName ? (cleanName(winnerName)===cleanName(uname()) ? "win" : "loss") : (/draw/i.test(String(reason||"")) ? "draw" : "");
         if(["win","loss","draw"].includes(finalResult)){
           const statsKey=(window.__activeMatchNumber||currentGameId||"match")+"|FINAL";
           if(!statsRecordedKeys.has(statsKey)){ statsRecordedKeys.add(statsKey); updateMyStats(finalResult,1200); }
