@@ -2840,9 +2840,10 @@ function subscribeLivePlayers(){
         if(doc.id === currentUser.uid || !d.username) return;
 
         // Treat a player as live only if their heartbeat is reasonably fresh.
-        let fresh = true;
+        let fresh = false;
         if(d.lastSeen && typeof d.lastSeen.toMillis === 'function'){
-          fresh = (now - d.lastSeen.toMillis()) < 70000;
+          const age = now - d.lastSeen.toMillis();
+          fresh = age >= -10000 && age < 70000;
         }
         if(fresh) players.push({uid:doc.id, username:d.username});
       });
@@ -2858,71 +2859,42 @@ function subscribeLivePlayers(){
     });
 }
 
-function getRandomBotStart(){
-  return Math.floor(Math.random()*9991); // 0..9990, always leaves 10 visible
-}
-
-let liveBotStartIndex = getRandomBotStart();
-
 function renderLivePlayers(players, emptyMessage){
   const el = document.getElementById('livePlayersList');
   const countEl = document.getElementById('onlineCount');
   const searchEl = document.getElementById('livePlayerSearch');
   if(!el || !countEl) return;
 
-  const indianNames=[
-    'Aarav','Vivaan','Aditya','Arjun','Kabir','Vihaan','Rohan','Rahul','Kunal','Yash',
-    'Aryan','Dev','Krishna','Ishaan','Ayaan','Dhruv','Ananya','Meera','Ira','Kiara',
-    'Neel','Reyansh','Atharv','Rudra','Saanvi','Myra','Aditi','Nisha','Tanya','Pihu'
-  ];
-  const englishNames=['Oliver','Liam','Noah','Ethan','James','Lucas','Henry','Leo','Jack','Mason','Oscar','Ryan','Alex','Max','Daniel','Sam','Charlie','Evan','Adam','Ben'];
-  const totalBots=10000;
-  const realAll=[...players.filter(p=>!p.isBot)];
-  const query=(searchEl?.value||'').trim().toLowerCase();
-  const real=realAll
-    .filter(p=>!query || String(p.username||'').toLowerCase().includes(query))
-    .sort((a,b)=>String(a.username||'').localeCompare(String(b.username||'')));
+  // Only show authenticated users reported by Firestore presence.
+  const realAll = (players || []).filter(p => p && p.uid && p.username && !p.isBot);
+  const query = (searchEl?.value || '').trim().toLowerCase();
+  const visible = realAll
+    .filter(p => !query || String(p.username).toLowerCase().includes(query))
+    .sort((a,b) => String(a.username).localeCompare(String(b.username)));
 
-  const botNames=[];
-  for(let offset=0;offset<10;offset++){
-    const i=((liveBotStartIndex+offset)%totalBots)+1;
-    const pool=(i%2===0)?englishNames:indianNames;
-    const base=pool[(i-1)%pool.length];
-    botNames.push({uid:`bot-${String(i).padStart(5,'0')}`,username:`${base} ${String(i).padStart(5,'0')}`,isBot:true,level:['easy','medium','hard'][i%3]});
-  }
-
-  countEl.textContent='10,000 online';
-  // Real users are always first. Bots are the available 10K pool preview.
-  const visible=[...real,...botNames];
+  countEl.textContent = realAll.length + ' online';
   if(!visible.length){
-    el.innerHTML='<div class="empty">'+escapeHtml(query?'No real player found for “'+query+'”.':'Looking for players…')+'</div>';
+    el.innerHTML = '<div class="empty">' + escapeHtml(emptyMessage ||
+      (query ? 'No online player matches your search.' : 'No other players online right now.')) + '</div>';
     return;
   }
 
-  el.innerHTML = visible.map(p=>{
-    const initial=(p.username||'?').charAt(0).toUpperCase();
-    return `<div class="live-player"><div class="live-player-info"><div class="live-avatar">${escapeHtml(initial)}</div><div><div class="live-player-name">${escapeHtml(p.username)}</div><div class="live-player-state">● ${p.isBot?'Ready to play':'Online now'}</div></div></div><button class="small primary live-play-btn" data-uid="${escapeHtml(p.uid)}">Play</button></div>`;
-  }).join('') + `<div class="hint live-player-loading" style="grid-column:1/-1">Showing 10 opponents from <b>10,000</b> available names. Refresh for a new set.</div>`;
+  el.innerHTML = visible.map(p => {
+    const initial = String(p.username).charAt(0).toUpperCase();
+    return `<div class="live-player"><div class="live-player-info"><div class="live-avatar">${escapeHtml(initial)}</div><div><div class="live-player-name">${escapeHtml(p.username)}</div><div class="live-player-state">● Online now</div></div></div><button class="small primary live-play-btn" data-uid="${escapeHtml(p.uid)}">Play</button></div>`;
+  }).join('');
 
-  el.querySelectorAll('button[data-uid]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const id=btn.dataset.uid;
-      const p=visible.find(x=>x.uid===id);
-      if(p?.isBot){
-        botPersonality=null;
-        botDisplayName=p.username;
-        activeBotDisplayName=p.username;
-        startBotGame(p.level,p.username);
-      } else if(p){
-        playLivePlayer(p.uid,p.username);
-      }
+  el.querySelectorAll('button[data-uid]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const player = visible.find(p => p.uid === btn.dataset.uid);
+      if(player) playLivePlayer(player.uid, player.username);
     });
   });
 }
 
 function refreshLivePlayers(){
-  liveBotStartIndex=getRandomBotStart();
-  renderLivePlayers(window.__liveRealPlayers||[]);
+  // Refresh from Firestore rather than rotating generated names.
+  subscribeLivePlayers();
 }
 
 function initLivePlayerControls(){
