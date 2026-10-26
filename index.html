@@ -2826,89 +2826,38 @@ function stopPresence(){
 }
 
 function subscribeLivePlayers(){
-  if(livePlayersUnsub) livePlayersUnsub();
-  if(!currentUser) return;
-
-  livePlayersUnsub = db.collection('users')
-    .where('online','==',true)
-    .onSnapshot(snap=>{
-      const players = [];
-      const now = Date.now();
-
-      snap.forEach(doc=>{
-        const d = doc.data() || {};
-        if(doc.id === currentUser.uid || !d.username) return;
-
-        // Treat a player as live only if their heartbeat is reasonably fresh.
-        let fresh = false;
-        if(d.lastSeen && typeof d.lastSeen.toMillis === 'function'){
-          const age = now - d.lastSeen.toMillis();
-          fresh = age >= -10000 && age < 70000;
-        }
-        if(fresh) players.push({uid:doc.id, username:d.username});
-      });
-
-      players.sort((a,b)=>a.username.localeCompare(b.username));
-      window.__liveRealPlayers=players;
-      initLivePlayerControls();
-      renderLivePlayers(players);
-    }, ()=>{
-      window.__liveRealPlayers=[];
-      initLivePlayerControls();
-      renderLivePlayers([], 'Live player list unavailable.');
+  if(livePlayersUnsub)livePlayersUnsub();
+  if(!currentUser)return;
+  livePlayersUnsub=db.collection("users").where("online","==",true).onSnapshot(snap=>{
+    const now=Date.now(),players=[];
+    snap.forEach(doc=>{
+      const p=doc.data()||{};
+      const seen=p.lastSeen&&typeof p.lastSeen.toMillis==="function"?p.lastSeen.toMillis():0;
+      if(doc.id!==currentUser.uid&&p.username&&!p.isBot&&!p.bot&&seen&&Math.abs(now-seen)<70000){
+        players.push({uid:doc.id,username:p.username,lastSeen:seen});
+      }
     });
+    window.__liveRealPlayers=players;initLivePlayerControls();renderLivePlayers(players);
+  },err=>{console.error("Presence listener failed",err);window.__liveRealPlayers=[];renderLivePlayers([],"Online list unavailable: check Firestore access.");});
 }
-
-function renderLivePlayers(players, emptyMessage){
-  const el = document.getElementById('livePlayersList');
-  const countEl = document.getElementById('onlineCount');
-  const searchEl = document.getElementById('livePlayerSearch');
-  if(!el || !countEl) return;
-
-  // Only show authenticated users reported by Firestore presence.
-  const realAll = (players || []).filter(p => p && p.uid && p.username && !p.isBot);
-  const query = (searchEl?.value || '').trim().toLowerCase();
-  const visible = realAll
-    .filter(p => !query || String(p.username).toLowerCase().includes(query))
-    .sort((a,b) => String(a.username).localeCompare(String(b.username)));
-
-  countEl.textContent = realAll.length + ' online';
-  if(!visible.length){
-    el.innerHTML = '<div class="empty">' + escapeHtml(emptyMessage ||
-      (query ? 'No online player matches your search.' : 'No other players online right now.')) + '</div>';
-    return;
-  }
-
-  el.innerHTML = visible.map(p => {
-    const initial = String(p.username).charAt(0).toUpperCase();
-    return `<div class="live-player"><div class="live-player-info"><div class="live-avatar">${escapeHtml(initial)}</div><div><div class="live-player-name">${escapeHtml(p.username)}</div><div class="live-player-state">● Online now</div></div></div><button class="small primary live-play-btn" data-uid="${escapeHtml(p.uid)}">Play</button></div>`;
-  }).join('');
-
-  el.querySelectorAll('button[data-uid]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const player = visible.find(p => p.uid === btn.dataset.uid);
-      if(player) playLivePlayer(player.uid, player.username);
-    });
-  });
+function renderLivePlayers(players,emptyMessage){
+  const el=document.getElementById("livePlayersList"),countEl=document.getElementById("onlineCount"),searchEl=document.getElementById("livePlayerSearch");
+  if(!el||!countEl)return;
+  const now=Date.now(),real=(players||[]).filter(p=>p.uid&&p.username&&!p.isBot&&Number.isFinite(p.lastSeen)&&Math.abs(now-p.lastSeen)<70000);
+  countEl.textContent=real.length+" online";
+  const query=(searchEl?.value||"").trim().toLowerCase();
+  const visible=real.filter(p=>!query||p.username.toLowerCase().includes(query)).sort((a,b)=>a.username.localeCompare(b.username));
+  if(!visible.length){el.innerHTML='<div class="empty">'+escapeHtml(emptyMessage||(query?"No matching real player online.":"No other real players online right now."))+"</div>";return;}
+  el.innerHTML=visible.map(p=>'<div class="live-player"><div class="live-player-info"><div class="live-avatar">'+escapeHtml(p.username.charAt(0).toUpperCase())+'</div><div><div class="live-player-name">'+escapeHtml(p.username)+'</div><div class="live-player-state">● Online now</div></div></div><button class="small primary live-play-btn" data-uid="'+escapeHtml(p.uid)+'">Play</button></div>').join("");
+  el.querySelectorAll("button[data-uid]").forEach(btn=>btn.addEventListener("click",()=>{const p=visible.find(x=>x.uid===btn.dataset.uid);if(p)playLivePlayer(p.uid,p.username);}));
 }
-
-function refreshLivePlayers(){
-  // Refresh from Firestore rather than rotating generated names.
-  subscribeLivePlayers();
-}
-
+function refreshLivePlayers(){subscribeLivePlayers();}
 function initLivePlayerControls(){
-  const search=document.getElementById('livePlayerSearch');
-  const refresh=document.getElementById('btnRefreshLivePlayers');
-  if(search && !search.dataset.bound){
-    search.dataset.bound='1';
-    search.addEventListener('input',()=>renderLivePlayers(window.__liveRealPlayers||[]));
-  }
-  if(refresh && !refresh.dataset.bound){
-    refresh.dataset.bound='1';
-    refresh.addEventListener('click',refreshLivePlayers);
-  }
+  const search=document.getElementById("livePlayerSearch"),refresh=document.getElementById("btnRefreshLivePlayers");
+  if(search&&!search.dataset.bound){search.dataset.bound="1";search.addEventListener("input",()=>renderLivePlayers(window.__liveRealPlayers||[]));}
+  if(refresh&&!refresh.dataset.bound){refresh.dataset.bound="1";refresh.addEventListener("click",refreshLivePlayers);}
 }
+setInterval(()=>{if(currentUser)renderLivePlayers(window.__liveRealPlayers||[]);},15000);
 
 function setQuickMatchUI(searching, message){
   const card = document.querySelector('.live-match-card');
@@ -3259,7 +3208,7 @@ window.addEventListener('pagehide',function(){
       document.getElementById("whiteName").textContent,
       document.getElementById("blackName").textContent,
       gameMode==="bot"?"vs Computer":"Local 2-player");
-    showResultCelebration(wn,"TIME OUT",winner+" wins because the clock reached 00:00.");
+    window.showResultCelebration(wn,"TIME OUT",winner+" wins because the clock reached 00:00.");
   }
 
   function enforceClock(){
@@ -3365,7 +3314,8 @@ window.addEventListener('pagehide',function(){
     const blackName=document.getElementById("blackName").textContent;
     const wn=winner ? document.getElementById(winner==="White"?"whiteName":"blackName").textContent.replace(/\s*\(you\)\s*$/,"") : "";
     saveFinishedHistory(result,wn,reason,whiteName,blackName,gameMode==="bot"?"vs Computer":"Local 2-player");
-    if(winner) showResultCelebration(wn,"WINNER",wn+" wins the game! 🎉");
+    if(winner) window.showResultCelebration(wn,"WINNER",wn+" wins the game! 🎉");
+    else window.showResultCelebration("","DRAW","Game finished in a draw.");
   }
 
   /* ---------- Online terminal states + lock ---------- */
@@ -3513,29 +3463,27 @@ window.addEventListener('pagehide',function(){
     }
   }
 
-  async function updateMyStats(result, opponentRating){
-    if(!uid() || !window.db) return;
-    const ref=db.collection("users").doc(uid());
-    const snap=await ref.get().catch(()=>null);
-    const d=snap && snap.exists ? snap.data() : {};
-    const games=(d.games||0)+1;
-    const wins=(d.wins||0)+(result==="win"?1:0);
-    const losses=(d.losses||0)+(result==="loss"?1:0);
-    const draws=(d.draws||0)+(result==="draw"?1:0);
-    const oldRating=d.rating||1200;
-    const opp=Number(opponentRating||1200);
-    const expected=1/(1+Math.pow(10,(opp-oldRating)/400));
-    const actual=result==="win"?1:result==="draw"?.5:0;
-    const k=32;
-    const rating=Math.max(100,Math.round(oldRating+k*(actual-expected)));
-    const streak=result==="win"?(d.streak||0)+1:0;
-    const bestStreak=Math.max(d.bestStreak||0,streak);
-    const winPct=games ? +(wins/games*100).toFixed(2) : 0;
-    await ref.set({username:uname(),games,wins,losses,draws,rating,winPct,streak,bestStreak,
-      updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).catch(()=>{});
-    renderMyProfile({games,wins,losses,draws,rating,winPct,streak,bestStreak});
-    renderAchievements({games,wins,losses,draws,rating,winPct,streak,bestStreak});
-    renderPerformance({games,wins,losses,draws,rating,winPct,streak,bestStreak});
+  async function updateMyStats(result,opponentRating,matchKey){
+    if(!uid() || !matchKey)return false;
+    const ref=db.collection("users").doc(uid());let changed=null;
+    await db.runTransaction(async tx=>{
+      const snap=await tx.get(ref),d=snap.exists?(snap.data()||{}):{};
+      const counted=Array.isArray(d.countedMatchKeys)?d.countedMatchKeys:[];
+      if(counted.includes(matchKey))return;
+      const games=Number(d.games||0)+1,wins=Number(d.wins||0)+(result==="win"?1:0);
+      const losses=Number(d.losses||0)+(result==="loss"?1:0),draws=Number(d.draws||0)+(result==="draw"?1:0);
+      const oldRating=Number(d.rating||1200),opp=Number(opponentRating||1200);
+      const expected=1/(1+Math.pow(10,(opp-oldRating)/400));
+      const actual=result==="win"?1:result==="draw"?.5:0;
+      const rating=Math.max(100,Math.round(oldRating+32*(actual-expected)));
+      const streak=result==="win"?Number(d.streak||0)+1:0;
+      changed={username:uname(),games,wins,losses,draws,rating,winPct:+(wins/games*100).toFixed(2),streak,
+        bestStreak:Math.max(Number(d.bestStreak||0),streak),countedMatchKeys:[...counted,matchKey],
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+      tx.set(ref,changed,{merge:true});
+    });
+    if(changed){renderMyProfile(changed);renderAchievements(changed);renderPerformance(changed);}
+    return !!changed;
   }
 
   function resultForMe(winnerUid, status){
@@ -3626,14 +3574,14 @@ window.addEventListener('pagehide',function(){
   /* ---------- Game result -> cloud stats ---------- */
   const originalShowResult = window.showResultCelebration;
   let statsRecordedKeys = new Set();
-  async function recordCloudResult(winnerUid, status, key, opponentRating){
-    if(!uid() || statsRecordedKeys.has(key)) return;
-    statsRecordedKeys.add(key);
+  async function recordCloudResult(winnerUid,status,key,opponentRating){
+    if(!uid()||statsRecordedKeys.has(key))return;
     const result=resultForMe(winnerUid,status);
-    await updateMyStats(result,opponentRating);
-    playSound(result==="win"?"win":result==="draw"?"draw":"lose");
-    renderLeaderboard();
-    
+    try{
+      const changed=await updateMyStats(result,opponentRating,key);
+      statsRecordedKeys.add(key);
+      if(changed){playSound(result==="win"?"win":result==="draw"?"draw":"lose");renderLeaderboard();}
+    }catch(e){console.error("Stats write failed",e);}
   }
 
   /* ---------- Sound effects ---------- */
@@ -3754,20 +3702,16 @@ window.addEventListener('pagehide',function(){
     }
   }
 
-  /* Wrap result popup so local games also update profile stats. */
+  /* Only the signed-in human's bot matches affect their account stats. */
   if(typeof originalShowResult==="function"){
     window.showResultCelebration=function(winnerName,reason,message){
       originalShowResult(winnerName,reason,message);
-      const cleanName=v=>String(v||"").replace(/\s*\(you\)\s*$/i,"").trim();
-      const white=cleanName(q("whiteName")?.textContent||"White"), black=cleanName(q("blackName")?.textContent||"Black");
+      if(gameMode!=="bot"||!currentUser)return;
+      const clean=v=>String(v||"").replace(/ \(you\)$/i,"").trim();
+      const winner=clean(winnerName),result=!winner?"draw":winner===clean(uname())?"win":"loss";
+      const matchKey="bot:"+(window.__activeMatchNumber||"unknown");
       saveFinishedGame(reason,winnerName);
-      if(gameMode!=="online"){
-        const finalResult = winnerName ? (cleanName(winnerName)===cleanName(uname()) ? "win" : "loss") : (/draw/i.test(String(reason||"")) ? "draw" : "");
-        if(["win","loss","draw"].includes(finalResult)){
-          const statsKey=(window.__activeMatchNumber||currentGameId||"match")+"|FINAL";
-          if(!statsRecordedKeys.has(statsKey)){ statsRecordedKeys.add(statsKey); updateMyStats(finalResult,1200); }
-        }
-      }
+      recordCloudResult(result==="win"?uid():"opponent",result==="draw"?"draw":"finished",matchKey,1200);
     };
   }
 
@@ -3844,11 +3788,12 @@ window.addEventListener('pagehide',function(){
         hideTakebackToast();
       }
       if(["timeout","checkmate","resigned","draw","abandoned"].includes(g.status)){
-        const winnerName=g.winner===g.whiteUid?g.whiteUsername:g.winner===g.blackUid?g.blackUsername:"";
-        const finalResult=g.status==="draw" ? "draw" : (winnerName ? resultForMe(g.winner,g.status) : "");
+        const winnerUid=g.winner==="white"?g.whiteUid:g.winner==="black"?g.blackUid:(g.winner===g.whiteUid||g.winner===g.blackUid?g.winner:null);
+        const winnerName=winnerUid===g.whiteUid?g.whiteUsername:winnerUid===g.blackUid?g.blackUsername:"";
+        const finalResult=g.status==="draw" ? "draw" : (winnerUid ? resultForMe(winnerUid,g.status) : "");
         if(finalResult){
           saveFinishedGame(g.resultReason||g.status,winnerName);
-          recordCloudResult(g.winner,g.status,gameId+"|FINAL|"+(g.winner||"draw"),1200);
+          recordCloudResult(winnerUid,g.status,"online:"+gameId,1200);
         }
         q("btnDrawOffer")?.setAttribute("disabled","disabled");
         q("btnTakeback")?.setAttribute("disabled","disabled");
